@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lauren's HESI Study Plan — Day 1: Cardiovascular System</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f7f7f5;
+    --bg-tertiary: #f0efe9;
+    --text: #1a1a1a;
+    --text-muted: #5f5e5a;
+    --text-hint: #888780;
+    --border: rgba(0,0,0,0.12);
+    --border-med: rgba(0,0,0,0.2);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --red-bg: #FCEBEB;
+    --red-text: #A32D2D;
+    --red-dark: #791F1F;
+    --blue-bg: #E6F1FB;
+    --blue-text: #185FA5;
+    --blue-dark: #0C447C;
+    --purple-bg: #EEEDFE;
+    --purple-text: #534AB7;
+    --green-bg: #EAF3DE;
+    --green-text: #3B6D11;
+    --teal-bg: #E1F5EE;
+    --teal-text: #0F6E56;
+    --amber-bg: #FAEEDA;
+    --amber-text: #854F0B;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: #1e1b4b;
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .page-header-left { display: flex; align-items: center; gap: 14px; }
+  .header-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 600; color: white;
+    flex-shrink: 0;
+  }
+  .header-name { font-size: 13px; opacity: 0.7; }
+  .header-title { font-size: 17px; font-weight: 600; }
+  .header-score {
+    background: rgba(255,255,255,0.12);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    text-align: center;
+  }
+  .header-score-num { font-size: 22px; font-weight: 700; }
+  .header-score-label { font-size: 11px; opacity: 0.65; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  .day-banner {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .day-pill {
+    display: inline-block;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: var(--radius-md);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .day-title { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .day-goal { font-size: 13px; color: var(--text-muted); }
+  .day-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .meta-chip {
+    font-size: 12px; color: var(--text-hint);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .meta-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+  .tab {
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: white;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .tab:hover { background: var(--bg-tertiary); }
+  .tab.active { background: var(--blue-bg); color: var(--blue-text); border-color: transparent; }
+
+  .sec { display: none; }
+  .sec.active { display: block; }
+
+  .card {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+  }
+  .b-red { background: var(--red-bg); color: var(--red-text); }
+  .b-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .b-purple { background: var(--purple-bg); color: var(--purple-text); }
+
+  .card-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .card-body { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+  .chambers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .chamber {
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+  }
+  .chamber-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .chamber-desc { font-size: 12px; line-height: 1.5; }
+  .ch-right { background: var(--red-bg); }
+  .ch-right .chamber-name { color: var(--red-text); }
+  .ch-right .chamber-desc { color: var(--red-dark); }
+  .ch-left { background: var(--blue-bg); }
+  .ch-left .chamber-name { color: var(--blue-text); }
+  .ch-left .chamber-desc { color: var(--blue-dark); }
+
+  .circuit-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin: 12px 0 6px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .flow-step {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius-md);
+    padding: 5px 9px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .flow-arrow { font-size: 12px; color: var(--text-hint); }
+
+  .tip-box {
+    background: var(--amber-bg);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--amber-text);
+    font-style: italic;
+  }
+
+  .start-quiz-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: opacity 0.15s;
+  }
+  .start-quiz-btn:hover { opacity: 0.88; }
+
+  .q-meta { font-size: 13px; color: var(--text-hint); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .q-text { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 14px; line-height: 1.5; }
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    padding: 12px 15px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    text-align: left;
+    transition: background 0.1s;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) { background: var(--bg-secondary); }
+  .opt.correct { background: var(--green-bg); color: var(--green-text); border-color: transparent; font-weight: 500; }
+  .opt.wrong { background: var(--red-bg); color: var(--red-text); border-color: transparent; }
+  .opt:disabled { cursor: default; }
+  .explain {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    padding: 10px 13px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    line-height: 1.65;
+    display: none;
+    border-left: 3px solid var(--teal-text);
+  }
+  .q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; gap: 8px; }
+  .nav-btn {
+    padding: 9px 20px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    background: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.1s;
+  }
+  .nav-btn:hover:not(:disabled) { background: var(--bg-secondary); }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .score-track { height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; margin: 8px 0; }
+  .score-fill { height: 100%; background: var(--teal-text); border-radius: 3px; transition: width 0.4s ease; }
+
+  .result-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .result-score-num { font-size: 48px; font-weight: 700; color: #1e1b4b; }
+  .result-pct { font-size: 22px; font-weight: 600; color: var(--text-muted); margin: 4px 0 12px; }
+  .result-msg { font-size: 15px; color: var(--text-muted); max-width: 380px; margin: 0 auto 1.5rem; line-height: 1.6; }
+  .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 11px 22px;
+    background: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    padding: 11px 22px;
+    background: white;
+    color: var(--text);
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .btn-secondary:hover { background: var(--bg-secondary); }
+
+  .progress-dots { display: flex; gap: 6px; justify-content: center; margin-top: 1.5rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-med); }
+  .dot.done { background: var(--teal-text); }
+  .dot.current { background: #1e1b4b; }
+
+  @media (max-width: 520px) {
+    .page-header { padding: 1rem 1.25rem; }
+    .chambers-grid { grid-template-columns: 1fr; }
+    .container { padding: 1.25rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="page-header-left">
+    <div class="header-avatar">L</div>
+    <div>
+      <div class="header-name">HESI Study Plan</div>
+      <div class="header-title">Lauren's Week of Success</div>
+    </div>
+  </div>
+  <div class="header-score">
+    <div class="header-score-num">33/50</div>
+    <div class="header-score-label">Diagnostic score — let's improve it!</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="day-banner">
+    <div>
+      <span class="day-pill">Day 1 of 7</span>
+      <div class="day-title">Cardiovascular system</div>
+      <div class="day-goal">Goal: Understand the path of blood and how the heart works</div>
+    </div>
+    <div class="day-meta">
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        60–90 min
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        20 questions
+      </span>
+    </div>
+  </div>
+
+  <div class="progress-dots" style="margin-bottom:1.5rem; justify-content:flex-start; gap:8px;">
+    <div class="dot current" title="Day 1"></div>
+    <div class="dot" title="Day 2"></div>
+    <div class="dot" title="Day 3"></div>
+    <div class="dot" title="Day 4"></div>
+    <div class="dot" title="Day 5"></div>
+    <div class="dot" title="Day 6"></div>
+    <div class="dot" title="Day 7"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="sw('study', this)">Study notes</button>
+    <button class="tab" onclick="sw('quiz', this)">Practice quiz (20 Q)</button>
+  </div>
+
+  <div id="study" class="sec active">
+
+    <!--
+  ══════════════════════════════════════════════════════════
+  LAUREN HESI DAY 1 — CARDIAC BLOOD FLOW PATCH
+  ══════════════════════════════════════════════════════════
+
+  HOW TO USE THIS FILE:
+  Open index.html in Cursor. Use Cmd+F to find the text:
+
+      "Heart chambers"
+
+  You should find it inside a <ul> or a topic/notes section.
+  Paste the ENTIRE block below JUST BEFORE that section
+  (or right after the topic header for "Heart Chambers / Blood Flow").
+
+  This adds:
+  1. A labeled heart diagram (Wikimedia CC image)
+  2. A visual blood flow stepper showing the 4-step circuit
+  3. Attribution credit (required for Wikimedia CC images)
+  ══════════════════════════════════════════════════════════
+-->
+
+<!-- ── CARDIAC DIAGRAM + FLOW STEPPER ── -->
+<div style="margin-bottom: 20px;">
+
+  <!-- Heart diagram from Wikimedia Commons (CC BY-SA 3.0, ZooFari) -->
+  <div style="
+    background: #f4f6fb;
+    border: 1px solid #dde2f0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  ">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2ab4a0;">
+      Labeled Heart Diagram
+    </div>
+    <img
+      src=src="heart-diagram.png""
+      alt="Heart diagram showing blood flow with labeled chambers, valves, and vessels"
+      style="max-width: 100%; width: 380px; border-radius: 8px; display: block;"
+    >
+    <p style="font-size:11px;color:#6b7a9b;text-align:center;margin:0;">
+      Diagram by ZooFari, Wikimedia Commons —
+      <a href="https://creativecommons.org/licenses/by-sa/3.0/" style="color:#2ab4a0;" target="_blank">CC BY-SA 3.0</a>
+    </p>
+  </div>
+
+  <!-- Blood Flow Stepper -->
+  <div style="
+    background: white;
+    border: 1px solid #dde2f0;
+    border-radius: 10px;
+    padding: 20px;
+  ">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2ab4a0;margin-bottom:14px;">
+      Blood Flow — Step by Step
+    </div>
+
+    <!-- Step dots -->
+    <div id="step-dots" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;"></div>
+
+    <!-- Step content -->
+    <div id="step-content" style="
+      background: #1a2744;
+      border-radius: 8px;
+      padding: 16px 18px;
+      color: white;
+      min-height: 90px;
+    ">
+      <div id="step-icon" style="font-size:22px;margin-bottom:6px;"></div>
+      <div id="step-title" style="font-size:13px;font-weight:700;color:#e8b84b;margin-bottom:4px;"></div>
+      <div id="step-desc" style="font-size:13px;line-height:1.6;"></div>
+    </div>
+
+    <!-- Nav buttons -->
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button onclick="stepNav(-1)" style="
+        padding:8px 18px;border-radius:8px;border:2px solid #dde2f0;
+        background:transparent;font-family:Inter,sans-serif;font-size:13px;
+        font-weight:600;color:#1a2744;cursor:pointer;
+      ">← Back</button>
+      <button onclick="stepNav(1)" style="
+        padding:8px 18px;border-radius:8px;border:none;
+        background:#1a2744;font-family:Inter,sans-serif;font-size:13px;
+        font-weight:600;color:white;cursor:pointer;
+      ">Next →</button>
+      <span id="step-counter" style="margin-left:auto;font-size:12px;color:#6b7a9b;align-self:center;"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const steps = [
+    {
+      icon: "🔵",
+      title: "Step 1 — Deoxygenated blood enters the right side",
+      desc: "Blood low in oxygen returns from the body via the Superior and Inferior Vena Cava into the Right Atrium. The tricuspid valve opens and blood flows down into the Right Ventricle."
+    },
+    {
+      icon: "🫁",
+      title: "Step 2 — Right ventricle pumps to the lungs",
+      desc: "The Right Ventricle contracts, pushing blood through the Pulmonary Valve into the Pulmonary Artery. Blood travels to the lungs, where it drops off CO₂ and picks up oxygen. This is called pulmonary circulation."
+    },
+    {
+      icon: "🔴",
+      title: "Step 3 — Oxygenated blood returns to the left side",
+      desc: "Fresh, oxygen-rich blood returns from the lungs through the Pulmonary Veins into the Left Atrium. The mitral (bicuspid) valve opens and blood flows into the Left Ventricle."
+    },
+    {
+      icon: "💪",
+      title: "Step 4 — Left ventricle pumps to the body",
+      desc: "The Left Ventricle — the heart's most powerful chamber — contracts and pushes blood through the Aortic Valve into the Aorta. Blood travels to the entire body. This is systemic circulation. Then the cycle repeats."
+    }
+  ];
+
+  let current = 0;
+
+  function render() {
+    const s = steps[current];
+    document.getElementById('step-icon').textContent = s.icon;
+    document.getElementById('step-title').textContent = s.title;
+    document.getElementById('step-desc').textContent = s.desc;
+    document.getElementById('step-counter').textContent = (current + 1) + ' of ' + steps.length;
+
+    const dots = document.getElementById('step-dots');
+    dots.innerHTML = '';
+    steps.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.style.cssText = 'width:28px;height:8px;border-radius:4px;cursor:pointer;transition:background 0.2s;background:' + (i === current ? '#e8b84b' : i < current ? '#2ab4a0' : '#dde2f0');
+      d.onclick = function() { current = i; render(); };
+      dots.appendChild(d);
+    });
+  }
+
+  window.stepNav = function(dir) {
+    current = Math.max(0, Math.min(steps.length - 1, current + dir));
+    render();
+  };
+
+  render();
+})();
+</script>
+<!-- ── END CARDIAC PATCH ── --><div class="card">
+      <span class="badge b-red">Heart chambers</span>
+      <div class="card-title">The 4 chambers</div>
+      <div class="card-body">The heart has two upper chambers called <strong>atria</strong> (singular: atrium) and two lower chambers called <strong>ventricles</strong>. The right side handles deoxygenated blood; the left side handles oxygenated blood.</div>
+      <div class="chambers-grid">
+        <div class="chamber ch-right">
+          <div class="chamber-name">Right atrium</div>
+          <div class="chamber-desc">Receives deoxygenated blood from the body via the vena cava</div>
+        </div>
+        <div class="chamber ch-right">
+          <div class="chamber-name">Right ventricle</div>
+          <div class="chamber-desc">Pumps deoxygenated blood to the lungs via the pulmonary artery</div>
+        </div>
+        <div class="chamber ch-left">
+          <div class="chamber-name">Left atrium</div>
+          <div class="chamber-desc">Receives oxygenated blood from the lungs via the pulmonary vein</div>
+        </div>
+        <div class="chamber ch-left">
+          <div class="chamber-name">Left ventricle</div>
+          <div class="chamber-desc">Pumps oxygenated blood to the body via the aorta — most muscular chamber</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge b-red">Blood flow path</span>
+      <div class="card-title">Complete circulation route</div>
+      <div class="card-body">Blood follows a continuous loop through two circuits:</div>
+      <div class="circuit-label">Pulmonary circuit (heart → lungs → heart)</div>
+      <div class="flow">
+        <span class="flow-step">Right atrium</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Right ventricle</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Pulmonary artery</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Lungs (O₂ added)</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Pulmonary vein</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Left atrium</span>
+      </div>
+      <div class="circuit-label">Systemic circuit (heart → body → heart)</div>
+      <div class="flow">
+        <span class="flow-step">Left ventricle</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Aorta</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Body tissues (O₂ used)</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Vena cava</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Right atrium</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge b-blue">Pulmonary vein vs. aorta</span>
+      <div class="card-title">The key mix-up to avoid</div>
+      <div class="card-body">
+        <strong>Pulmonary vein</strong> — carries oxygenated blood FROM the lungs TO the left atrium. It is the only vein in the body that carries oxygen-rich blood.<br><br>
+        <strong>Aorta</strong> — carries oxygenated blood FROM the left ventricle TO the body. It is the largest artery in the body.
+      </div>
+      <div class="tip-box">Memory tip: veins go TO the heart; arteries go FROM the heart — except the pulmonary pair, which are reversed!</div>
+    </div>
+
+    <div class="card">
+      <span class="badge b-purple">Key vessels</span>
+      <div class="card-title">Arteries vs. veins vs. capillaries</div>
+      <div class="card-body"><strong>Arteries</strong> carry blood away from the heart (usually oxygenated). <strong>Veins</strong> carry blood toward the heart (usually deoxygenated). <strong>Capillaries</strong> are the tiny vessels where oxygen and nutrients are exchanged with tissues. Memory trick: <em>Arteries = Away.</em></div>
+    </div>
+
+    <div class="card">
+      <span class="badge b-purple">Heart valves</span>
+      <div class="card-title">Keeping blood flowing one way</div>
+      <div class="card-body">Valves prevent backflow. <strong>Tricuspid valve</strong> — between right atrium and right ventricle. <strong>Mitral (bicuspid) valve</strong> — between left atrium and left ventricle. <strong>Semilunar valves</strong> — between ventricles and arteries. The "lub-dub" heartbeat sound is the valves closing.</div>
+    </div>
+
+    <button class="start-quiz-btn" onclick="sw('quiz', document.querySelectorAll('.tab')[1])">Ready to practice? Start the quiz →</button>
+
+  </div>
+
+  <div id="quiz" class="sec">
+    <div id="qbox"></div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {q:"How many chambers does the human heart have?", opts:["2","3","4","6"], ans:2, exp:"The heart has 4 chambers: right atrium, right ventricle, left atrium, and left ventricle."},
+  {q:"Which chamber receives deoxygenated blood from the body?", opts:["Left atrium","Left ventricle","Right atrium","Right ventricle"], ans:2, exp:"The right atrium receives deoxygenated blood from the body via the superior and inferior vena cava."},
+  {q:"Which chamber pumps blood to the lungs?", opts:["Left ventricle","Right atrium","Left atrium","Right ventricle"], ans:3, exp:"The right ventricle pumps deoxygenated blood to the lungs via the pulmonary artery."},
+  {q:"Which chamber is the most muscular and pumps blood to the whole body?", opts:["Right ventricle","Left atrium","Left ventricle","Right atrium"], ans:2, exp:"The left ventricle has the thickest walls because it must pump blood at high pressure through the entire systemic circuit."},
+  {q:"The pulmonary vein carries:", opts:["Deoxygenated blood from heart to lungs","Oxygenated blood from lungs to heart","Deoxygenated blood from body to heart","Oxygenated blood from heart to body"], ans:1, exp:"The pulmonary vein is unique — it's the only vein carrying oxygenated blood, traveling from the lungs to the left atrium."},
+  {q:"The aorta carries blood:", opts:["From lungs to heart","From right ventricle to lungs","From left ventricle to the body","From body to right atrium"], ans:2, exp:"The aorta is the body's largest artery and carries oxygenated blood from the left ventricle to the rest of the body."},
+  {q:"After blood is oxygenated in the lungs, where does it go next?", opts:["Right atrium","Aorta","Left atrium","Left ventricle"], ans:2, exp:"Oxygenated blood travels through the pulmonary veins to the left atrium, then to the left ventricle, then out to the body."},
+  {q:"Which vessel returns deoxygenated blood from the body to the heart?", opts:["Aorta","Pulmonary artery","Pulmonary vein","Vena cava"], ans:3, exp:"The superior and inferior vena cava collect deoxygenated blood from the body and return it to the right atrium."},
+  {q:"What is the correct order of blood flow through the right side of the heart?", opts:["Right ventricle → right atrium → lungs","Right atrium → right ventricle → pulmonary artery","Right atrium → aorta → lungs","Pulmonary vein → right atrium → right ventricle"], ans:1, exp:"Blood enters the right atrium, moves to the right ventricle, and is pumped to the lungs via the pulmonary artery."},
+  {q:"Arteries carry blood:", opts:["Toward the heart","Away from the heart","Only in the lungs","Only deoxygenated blood"], ans:1, exp:"Arteries always carry blood AWAY from the heart. Both 'artery' and 'away' start with A — easy memory trick!"},
+  {q:"Veins carry blood:", opts:["Away from the heart","Only oxygenated blood","Toward the heart","Only in the lungs"], ans:2, exp:"Veins carry blood TOWARD (to) the heart. The exception is the pulmonary pair, which carry the opposite of what you'd expect."},
+  {q:"Which valve is located between the left atrium and left ventricle?", opts:["Tricuspid valve","Pulmonary valve","Aortic valve","Mitral (bicuspid) valve"], ans:3, exp:"The mitral valve (also called bicuspid) sits between the left atrium and left ventricle, preventing backflow."},
+  {q:"The 'lub-dub' sound of the heartbeat is caused by:", opts:["Blood rushing through the aorta","Heart valves closing","The ventricles contracting","The atria filling with blood"], ans:1, exp:"The two sounds are caused by the closing of heart valves — first the atrioventricular valves, then the semilunar valves."},
+  {q:"Where does gas exchange (oxygen in, CO₂ out) take place?", opts:["Aorta","Vena cava","Capillaries","Pulmonary artery"], ans:2, exp:"Capillaries are thin enough for oxygen and nutrients to pass through into surrounding tissues and for CO₂ to be picked up."},
+  {q:"The pulmonary artery carries:", opts:["Oxygenated blood from lungs to heart","Deoxygenated blood from heart to lungs","Oxygenated blood from heart to body","Deoxygenated blood from body to heart"], ans:1, exp:"The pulmonary artery carries deoxygenated blood from the right ventricle to the lungs to pick up oxygen."},
+  {q:"Which side of the heart handles oxygenated blood?", opts:["Right side","Left side","Both sides equally","Neither — the valves handle it"], ans:1, exp:"The left side of the heart (left atrium and left ventricle) receives oxygenated blood from the lungs and pumps it to the body."},
+  {q:"What is the first vessel blood enters after leaving the left ventricle?", opts:["Capillaries","Vena cava","The lungs","The aorta"], ans:3, exp:"Blood exits the left ventricle directly into the aorta, the body's largest artery, which then branches to supply all body tissues."},
+  {q:"The tricuspid valve has how many leaflets (cusps)?", opts:["1","2","3","4"], ans:2, exp:"The tricuspid valve has 3 leaflets (tri = three). It sits between the right atrium and right ventricle."},
+  {q:"Which of the following correctly pairs a chamber with its function?", opts:["Left atrium pumps blood to body","Right ventricle receives blood from body","Left ventricle pumps blood to body","Right atrium pumps blood to lungs"], ans:2, exp:"The left ventricle pumps oxygenated blood through the aorta to the entire body. It is the hardest-working chamber."},
+  {q:"What is the purpose of the pulmonary circuit?", opts:["Deliver oxygen to body tissues","Pick up oxygen and release CO₂ in the lungs","Pump blood through the aorta","Filter blood through the kidneys"], ans:1, exp:"The pulmonary circuit oxygenates blood. Blood arrives low in oxygen, exchanges CO₂ for O₂ in the lungs, then returns to the heart ready for systemic circulation."}
+];
+
+let cur = 0, answered = false, score = 0, started = false;
+const total = questions.length;
+
+function sw(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'quiz' && !started) { started = true; renderQ(); }
+}
+
+function renderQ() {
+  answered = false;
+  const q = questions[cur];
+  const pct = cur === 0 ? 0 : Math.round(score / cur * 100);
+  document.getElementById('qbox').innerHTML = `
+    <div class="card">
+      <div class="q-meta">
+        <span>Question ${cur + 1} of ${total}</span>
+        <span>Score: ${score} / ${cur}</span>
+      </div>
+      <div class="score-track"><div class="score-fill" style="width:${pct}%"></div></div>
+      <p class="q-text" style="margin-top:14px;">${q.q}</p>
+      <div class="opts">${q.opts.map((o, i) => `<button class="opt" onclick="choose(${i})" id="o${i}">${o}</button>`).join('')}</div>
+      <div class="explain" id="exp"><strong>Explanation:</strong> ${q.exp}</div>
+      <div class="q-nav">
+        <button class="nav-btn" onclick="prev()" ${cur === 0 ? 'disabled' : ''}>← Prev</button>
+        <button class="nav-btn" onclick="next()" ${cur === total - 1 ? 'disabled' : ''}>Next →</button>
+      </div>
+    </div>`;
+}
+
+function choose(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[cur];
+  if (i === q.ans) score++;
+  document.querySelectorAll('.opt').forEach((el, idx) => {
+    el.disabled = true;
+    if (idx === q.ans) el.classList.add('correct');
+    else if (idx === i && i !== q.ans) el.classList.add('wrong');
+  });
+  document.getElementById('exp').style.display = 'block';
+}
+
+function next() {
+  if (cur < total - 1) { cur++; renderQ(); }
+  else showResult();
+}
+
+function prev() {
+  if (cur > 0) { cur--; renderQ(); }
+}
+
+function showResult() {
+  const pct = Math.round(score / total * 100);
+  let msg = pct >= 85
+    ? "Excellent work, Lauren! You're ready to move on to Day 2."
+    : pct >= 70
+    ? "Good effort! Review the questions you missed, then try again or move to Day 2."
+    : "Keep going — re-read the study notes and retake the quiz. You've got this!";
+  document.getElementById('qbox').innerHTML = `
+    <div class="result-card">
+      <div class="result-score-num">${score} / ${total}</div>
+      <div class="result-pct">${pct}%</div>
+      <p class="result-msg">${msg}</p>
+      <div class="score-track" style="max-width:280px; margin:0 auto 1.5rem;"><div class="score-fill" style="width:${pct}%"></div></div>
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="restart()">Retake quiz</button>
+        <button class="btn-primary" onclick="goStudy()">Review notes</button>
+      </div>
+    </div>`;
+}
+
+function restart() { cur = 0; score = 0; renderQ(); }
+function goStudy() { sw('study', document.querySelectorAll('.tab')[0]); }
+</script>
+</body>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:flex-end;">
+  <a href="lauren-hesi-day2.html" style="padding:10px 20px;border-radius:8px;background:#1a2744;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:white;text-decoration:none;">Day 2 →</a>
+</div>
+</html>

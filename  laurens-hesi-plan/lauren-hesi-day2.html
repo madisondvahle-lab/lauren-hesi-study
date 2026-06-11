@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lauren's HESI Study Plan — Day 2: Respiratory System</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f7f7f5;
+    --bg-tertiary: #f0efe9;
+    --text: #1a1a1a;
+    --text-muted: #5f5e5a;
+    --text-hint: #888780;
+    --border: rgba(0,0,0,0.12);
+    --border-med: rgba(0,0,0,0.2);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --red-bg: #FCEBEB;
+    --red-text: #A32D2D;
+    --red-dark: #791F1F;
+    --blue-bg: #E6F1FB;
+    --blue-text: #185FA5;
+    --blue-dark: #0C447C;
+    --purple-bg: #EEEDFE;
+    --purple-text: #534AB7;
+    --green-bg: #EAF3DE;
+    --green-text: #3B6D11;
+    --teal-bg: #E1F5EE;
+    --teal-text: #0F6E56;
+    --amber-bg: #FAEEDA;
+    --amber-text: #854F0B;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: #1e1b4b;
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .page-header-left { display: flex; align-items: center; gap: 14px; }
+  .header-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 600; color: white;
+    flex-shrink: 0;
+  }
+  .header-name { font-size: 13px; opacity: 0.7; }
+  .header-title { font-size: 17px; font-weight: 600; }
+  .header-score {
+    background: rgba(255,255,255,0.12);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    text-align: center;
+  }
+  .header-score-num { font-size: 22px; font-weight: 700; }
+  .header-score-label { font-size: 11px; opacity: 0.65; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  .day-banner {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .day-pill {
+    display: inline-block;
+    background: var(--teal-bg);
+    color: var(--teal-text);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: var(--radius-md);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .day-title { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .day-goal { font-size: 13px; color: var(--text-muted); }
+  .day-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .meta-chip {
+    font-size: 12px; color: var(--text-hint);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .meta-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+  .tab {
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: white;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .tab:hover { background: var(--bg-tertiary); }
+  .tab.active { background: var(--blue-bg); color: var(--blue-text); border-color: transparent; }
+
+  .sec { display: none; }
+  .sec.active { display: block; }
+
+  .card {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+  }
+  .b-red { background: var(--red-bg); color: var(--red-text); }
+  .b-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .b-purple { background: var(--purple-bg); color: var(--purple-text); }
+  .b-teal { background: var(--teal-bg); color: var(--teal-text); }
+  .b-amber { background: var(--amber-bg); color: var(--amber-text); }
+
+  .card-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .card-body { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+  /* Pathway structures grid */
+  .struct-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .struct {
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+  }
+  .struct-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .struct-desc { font-size: 12px; line-height: 1.5; }
+  .s-blue { background: var(--blue-bg); }
+  .s-blue .struct-name { color: var(--blue-text); }
+  .s-blue .struct-desc { color: var(--blue-dark); }
+  .s-teal { background: var(--teal-bg); }
+  .s-teal .struct-name { color: var(--teal-text); }
+  .s-teal .struct-desc { color: #0A5742; }
+
+  /* Breathing comparison */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .compare-col {
+    border-radius: var(--radius-md);
+    padding: 12px;
+  }
+  .compare-col-title { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+  .compare-col ul { list-style: none; padding: 0; }
+  .compare-col ul li { font-size: 12px; line-height: 1.6; }
+  .compare-col ul li::before { content: "• "; }
+  .c-inhale { background: var(--blue-bg); }
+  .c-inhale .compare-col-title { color: var(--blue-text); }
+  .c-inhale ul li { color: var(--blue-dark); }
+  .c-exhale { background: var(--red-bg); }
+  .c-exhale .compare-col-title { color: var(--red-text); }
+  .c-exhale ul li { color: var(--red-dark); }
+
+  /* Gas exchange visual */
+  .exchange-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    align-items: stretch;
+  }
+  .exchange-box {
+    flex: 1;
+    border-radius: var(--radius-md);
+    padding: 12px;
+    text-align: center;
+  }
+  .exchange-box .ex-label { font-size: 11px; font-weight: 600; margin-bottom: 6px; }
+  .exchange-box .ex-icon { font-size: 22px; margin-bottom: 4px; }
+  .exchange-box .ex-desc { font-size: 11px; line-height: 1.5; }
+  .ex-blood-in { background: var(--red-bg); }
+  .ex-blood-in .ex-label { color: var(--red-text); }
+  .ex-blood-in .ex-desc { color: var(--red-dark); }
+  .ex-alveolus { background: var(--blue-bg); border: 1.5px dashed #185FA5; }
+  .ex-alveolus .ex-label { color: var(--blue-text); }
+  .ex-alveolus .ex-desc { color: var(--blue-dark); }
+  .ex-blood-out { background: var(--teal-bg); }
+  .ex-blood-out .ex-label { color: var(--teal-text); }
+  .ex-blood-out .ex-desc { color: #0A5742; }
+  .exchange-arrow { display: flex; align-items: center; font-size: 18px; color: var(--text-hint); flex-shrink: 0; }
+
+  .circuit-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin: 12px 0 6px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .flow-step {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius-md);
+    padding: 5px 9px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .flow-arrow { font-size: 12px; color: var(--text-hint); }
+
+  .tip-box {
+    background: var(--amber-bg);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--amber-text);
+    font-style: italic;
+  }
+
+  .start-quiz-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: opacity 0.15s;
+  }
+  .start-quiz-btn:hover { opacity: 0.88; }
+
+  .q-meta { font-size: 13px; color: var(--text-hint); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .q-text { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 14px; line-height: 1.5; }
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    padding: 12px 15px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    text-align: left;
+    transition: background 0.1s;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) { background: var(--bg-secondary); }
+  .opt.correct { background: var(--green-bg); color: var(--green-text); border-color: transparent; font-weight: 500; }
+  .opt.wrong { background: var(--red-bg); color: var(--red-text); border-color: transparent; }
+  .opt:disabled { cursor: default; }
+  .explain {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    padding: 10px 13px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    line-height: 1.65;
+    display: none;
+    border-left: 3px solid var(--teal-text);
+  }
+  .q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; gap: 8px; }
+  .nav-btn {
+    padding: 9px 20px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-med);
+    background: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.1s;
+  }
+  .nav-btn:hover:not(:disabled) { background: var(--bg-secondary); }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .score-track { height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; margin: 8px 0; }
+  .score-fill { height: 100%; background: var(--teal-text); border-radius: 3px; transition: width 0.4s ease; }
+
+  .result-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .result-score-num { font-size: 48px; font-weight: 700; color: #1e1b4b; }
+  .result-pct { font-size: 22px; font-weight: 600; color: var(--text-muted); margin: 4px 0 12px; }
+  .result-msg { font-size: 15px; color: var(--text-muted); max-width: 380px; margin: 0 auto 1.5rem; line-height: 1.6; }
+  .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 11px 22px;
+    background: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    padding: 11px 22px;
+    background: white;
+    color: var(--text);
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .btn-secondary:hover { background: var(--bg-secondary); }
+
+  .progress-dots { display: flex; gap: 6px; justify-content: center; margin-top: 1.5rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-med); }
+  .dot.done { background: var(--teal-text); }
+  .dot.current { background: #1e1b4b; }
+
+  @media (max-width: 520px) {
+    .page-header { padding: 1rem 1.25rem; }
+    .struct-grid { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .exchange-row { flex-direction: column; }
+    .exchange-arrow { transform: rotate(90deg); align-self: center; }
+    .container { padding: 1.25rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="page-header-left">
+    <div class="header-avatar">L</div>
+    <div>
+      <div class="header-name">HESI Study Plan</div>
+      <div class="header-title">Lauren's Week of Success</div>
+    </div>
+  </div>
+  <div class="header-score">
+    <div class="header-score-num">33/50</div>
+    <div class="header-score-label">Diagnostic score — let's improve it!</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="day-banner">
+    <div>
+      <span class="day-pill">Day 2 of 7</span>
+      <div class="day-title">Respiratory System</div>
+      <div class="day-goal">Goal: Understand how oxygen gets into your blood</div>
+    </div>
+    <div class="day-meta">
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        60–90 min
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        20 questions
+      </span>
+    </div>
+  </div>
+
+  <div class="progress-dots" style="margin-bottom:1.5rem; justify-content:flex-start; gap:8px;">
+    <div class="dot done" title="Day 1"></div>
+    <div class="dot current" title="Day 2"></div>
+    <div class="dot" title="Day 3"></div>
+    <div class="dot" title="Day 4"></div>
+    <div class="dot" title="Day 5"></div>
+    <div class="dot" title="Day 6"></div>
+    <div class="dot" title="Day 7"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="sw('study', this)">Study notes</button>
+    <button class="tab" onclick="sw('quiz', this)">Practice quiz (20 Q)</button>
+  </div>
+
+  <div id="study" class="sec active">
+
+    <!-- AIRWAY STRUCTURES -->
+    <div class="card">
+      <span class="badge b-teal">Key structures</span>
+      <div class="card-title">The respiratory pathway</div>
+      <div class="card-body">Air travels through a series of branching tubes that get progressively smaller, ending at the alveoli where gas exchange happens. Think of it like a tree: trunk → big branches → small branches → leaves.</div>
+      <div class="struct-grid">
+        <div class="struct s-blue">
+          <div class="struct-name">Trachea (windpipe)</div>
+          <div class="struct-desc">The main airway connecting the throat to the lungs. Held open by C-shaped cartilage rings.</div>
+        </div>
+        <div class="struct s-blue">
+          <div class="struct-name">Bronchi</div>
+          <div class="struct-desc">The trachea splits into the left and right bronchus — one for each lung.</div>
+        </div>
+        <div class="struct s-teal">
+          <div class="struct-name">Bronchioles</div>
+          <div class="struct-desc">Tiny branches off the bronchi. No cartilage; can dilate or constrict (important in asthma).</div>
+        </div>
+        <div class="struct s-teal">
+          <div class="struct-name">Alveoli</div>
+          <div class="struct-desc">Microscopic air sacs at the end of bronchioles. This is where O₂ and CO₂ are exchanged.</div>
+        </div>
+      </div>
+      <div class="circuit-label">Air pathway (nose to alveoli)</div>
+      <div class="flow">
+        <span class="flow-step">Nose/mouth</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Trachea</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Bronchi</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Bronchioles</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Alveoli ✓</span>
+      </div>
+      <div class="tip-box">Memory trick: "The Big Bronchi Branch into Bronchioles, ending in Alveoli Air sacs" — follow the B's down to A.</div>
+    </div>
+
+    <!-- DIAPHRAGM -->
+    <div class="card">
+      <span class="badge b-blue">Diaphragm</span>
+      <div class="card-title">The engine of breathing</div>
+      <div class="card-body">
+        The <strong>diaphragm</strong> is a dome-shaped muscle located just below the lungs, separating the chest cavity from the abdomen. It is the <em>primary muscle of breathing</em> — responsible for approximately 75% of the work of inhalation.<br><br>
+        The diaphragm controls breathing by changing the pressure inside the chest:<br><br>
+        <strong>Inhale:</strong> The diaphragm contracts and flattens downward → the chest cavity volume increases → pressure drops → air rushes in to equalize.<br><br>
+        <strong>Exhale:</strong> The diaphragm relaxes and domes back upward → chest cavity volume decreases → pressure rises → air is pushed out.
+      </div>
+      <div class="tip-box">Key principle: air always flows from high pressure to low pressure. When the diaphragm flattens, it creates a low-pressure vacuum that pulls air in — like a bellows.</div>
+    </div>
+
+    <!-- BREATHING PROCESS -->
+    <div class="card">
+      <span class="badge b-purple">Breathing mechanics</span>
+      <div class="card-title">Inhalation vs. exhalation</div>
+      <div class="card-body">Breathing is controlled by pressure changes in the thoracic (chest) cavity. This is called <strong>negative pressure breathing</strong>.</div>
+      <div class="compare-grid">
+        <div class="compare-col c-inhale">
+          <div class="compare-col-title">Inhalation (active)</div>
+          <ul>
+            <li>Diaphragm contracts → moves down</li>
+            <li>Intercostal muscles lift ribs up and out</li>
+            <li>Chest cavity volume ↑</li>
+            <li>Pressure inside lungs ↓</li>
+            <li>Air flows <em>in</em> from high to low pressure</li>
+          </ul>
+        </div>
+        <div class="compare-col c-exhale">
+          <div class="compare-col-title">Exhalation (passive)</div>
+          <ul>
+            <li>Diaphragm relaxes → moves up</li>
+            <li>Intercostal muscles relax, ribs drop</li>
+            <li>Chest cavity volume ↓</li>
+            <li>Pressure inside lungs ↑</li>
+            <li>Air flows <em>out</em> from high to low pressure</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-box">Normal exhalation is passive (no muscle effort). Forced exhalation — like blowing out candles — uses the abdominal muscles to push harder.</div>
+    </div>
+
+    <!-- GAS EXCHANGE -->
+    <div class="card">
+      <span class="badge b-teal">Gas exchange</span>
+      <div class="card-title">How oxygen gets into your blood</div>
+      <div class="card-body">
+        Gas exchange happens in the <strong>alveoli</strong> by a process called <strong>diffusion</strong> — gases move from areas of high concentration to low concentration across a thin membrane. The alveolar walls are only one cell thick, and they are surrounded by a dense network of capillaries.
+      </div>
+      <div class="exchange-row">
+        <div class="exchange-box ex-blood-in">
+          <div class="ex-label">Blood arriving</div>
+          <div class="ex-icon">🔵</div>
+          <div class="ex-desc">Deoxygenated blood from the right ventricle — low O₂, high CO₂</div>
+        </div>
+        <div class="exchange-arrow">⇄</div>
+        <div class="exchange-box ex-alveolus">
+          <div class="ex-label">Alveolus (air sac)</div>
+          <div class="ex-icon">💨</div>
+          <div class="ex-desc">High O₂ from inhaled air; receives CO₂ from blood — then exhaled</div>
+        </div>
+        <div class="exchange-arrow">⇄</div>
+        <div class="exchange-box ex-blood-out">
+          <div class="ex-label">Blood leaving</div>
+          <div class="ex-icon">🔴</div>
+          <div class="ex-desc">Oxygenated blood heading to the left atrium — high O₂, low CO₂</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;" class="circuit-label">Gas exchange summary</div>
+      <div class="flow">
+        <span class="flow-step">O₂ in air → alveolus</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Diffuses into capillary</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Binds to hemoglobin</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Travels to left heart</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Delivered to body</span>
+      </div>
+      <div class="flow" style="margin-top:8px;">
+        <span class="flow-step">CO₂ from blood</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Diffuses into alveolus</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Exhaled out</span>
+      </div>
+      <div class="tip-box">O₂ and CO₂ move in opposite directions simultaneously. O₂ enters the blood; CO₂ exits. This is why the air you breathe out contains less oxygen and more CO₂ than the air you breathe in.</div>
+    </div>
+
+    <!-- SURFACTANT + COMPLIANCE -->
+    <div class="card">
+      <span class="badge b-blue">Alveoli detail</span>
+      <div class="card-title">Why alveoli don't collapse — surfactant</div>
+      <div class="card-body">
+        Alveoli are naturally prone to collapsing because of surface tension. <strong>Surfactant</strong> is a substance produced by the lungs (type II alveolar cells) that reduces surface tension and keeps alveoli open.<br><br>
+        <strong>Why it matters clinically:</strong> Premature infants often lack surfactant, causing Respiratory Distress Syndrome (RDS) — a high-yield HESI topic. Without surfactant, each breath requires enormous effort because alveoli keep collapsing.
+      </div>
+      <div class="tip-box">Think of surfactant like dish soap in water — it breaks surface tension and keeps the tiny air sacs from sticking shut.</div>
+    </div>
+
+    <!-- QUICK REVIEW TABLE -->
+    <div class="card">
+      <span class="badge b-purple">Quick review</span>
+      <div class="card-title">Key terms to memorize</div>
+      <div class="card-body">
+        <strong>Tidal volume</strong> — the amount of air inhaled/exhaled in a normal breath (~500 mL).<br><br>
+        <strong>Residual volume</strong> — air that always stays in the lungs; can never be fully exhaled.<br><br>
+        <strong>Hypoxia</strong> — low oxygen in tissues. <strong>Hypoxemia</strong> — low oxygen in the blood. (HESI loves this distinction!)<br><br>
+        <strong>Hyperventilation</strong> — breathing too fast → blows off too much CO₂ → blood becomes too alkaline (respiratory alkalosis).<br><br>
+        <strong>Hypoventilation</strong> — breathing too slowly → CO₂ builds up → blood becomes too acidic (respiratory acidosis).
+      </div>
+      <div class="tip-box">Hypoxia vs. Hypoxemia: -emia = in the blood. Hypoxemia is about the blood value; hypoxia is about what the tissues actually experience.</div>
+    </div>
+
+    <button class="start-quiz-btn" onclick="sw('quiz', document.querySelectorAll('.tab')[1])">Ready to practice? Start the quiz →</button>
+
+  </div>
+
+  <div id="quiz" class="sec">
+    <div id="qbox"></div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {q:"What is the primary muscle responsible for breathing?", opts:["Intercostal muscles","Abdominal muscles","Diaphragm","Pectoralis major"], ans:2, exp:"The diaphragm is the dome-shaped muscle below the lungs that does about 75% of the work of breathing. It contracts during inhalation and relaxes during exhalation."},
+  {q:"During inhalation, the diaphragm:", opts:["Relaxes and moves upward","Contracts and moves downward","Stays still","Contracts and moves upward"], ans:1, exp:"During inhalation the diaphragm contracts and flattens downward, increasing chest cavity volume. This lowers pressure inside the lungs, and air flows in."},
+  {q:"When the diaphragm contracts and flattens, what happens to air pressure in the lungs?", opts:["Pressure increases, air flows in","Pressure decreases, air flows in","Pressure increases, air flows out","Pressure decreases, air flows out"], ans:1, exp:"When the diaphragm flattens, chest cavity volume increases. Greater volume means lower pressure. Air always moves from high to low pressure, so it flows into the lungs."},
+  {q:"Normal (quiet) exhalation is considered:", opts:["Active — requires diaphragm contraction","Active — requires abdominal muscle effort","Passive — driven by elastic recoil","Passive — driven by intercostal muscles"], ans:2, exp:"Normal exhalation is passive. The diaphragm simply relaxes, the lungs recoil, volume decreases, pressure rises, and air exits without muscular effort."},
+  {q:"In what order does air travel through the respiratory tract?", opts:["Trachea → bronchi → alveoli → bronchioles","Bronchi → trachea → bronchioles → alveoli","Trachea → bronchi → bronchioles → alveoli","Bronchioles → bronchi → trachea → alveoli"], ans:2, exp:"Air travels: nose/mouth → trachea → bronchi (left and right) → bronchioles → alveoli. The pathway branches and narrows from trachea to alveoli."},
+  {q:"Which structure is the site of gas exchange in the lungs?", opts:["Trachea","Bronchi","Bronchioles","Alveoli"], ans:3, exp:"Alveoli are the tiny air sacs at the end of the bronchioles. Their thin walls and surrounding capillaries make them the ideal site for O₂ and CO₂ exchange by diffusion."},
+  {q:"How does oxygen move from the alveoli into the blood?", opts:["Active transport using ATP","Osmosis through the alveolar wall","Diffusion from high to low concentration","Filtration driven by blood pressure"], ans:2, exp:"Gas exchange occurs by diffusion. Oxygen concentration is higher in the alveolus than in the arriving blood, so O₂ diffuses across the thin alveolar-capillary membrane into the bloodstream."},
+  {q:"The trachea is kept open by:", opts:["Smooth muscle rings","C-shaped cartilage rings","Elastic fibers","Connective tissue bands"], ans:1, exp:"The trachea is reinforced by C-shaped cartilage rings that prevent it from collapsing when you breathe in. The open side of the C faces the esophagus, allowing food to pass."},
+  {q:"What gas moves FROM the blood INTO the alveoli during gas exchange?", opts:["Oxygen (O₂)","Nitrogen (N₂)","Carbon dioxide (CO₂)","Water vapor"], ans:2, exp:"CO₂ is a waste product of cellular metabolism. Blood arriving at the alveoli is high in CO₂ (from body tissues), so CO₂ diffuses into the alveolus and is exhaled."},
+  {q:"After gas exchange in the alveoli, where does oxygenated blood go next?", opts:["Right atrium","Aorta","Left atrium","Pulmonary artery"], ans:2, exp:"Oxygenated blood leaves the alveolar capillaries via the pulmonary veins and travels to the left atrium of the heart, then to the left ventricle, then out to the body via the aorta."},
+  {q:"Which cells produce surfactant in the lungs?", opts:["Type I alveolar cells","Type II alveolar cells","Bronchial epithelial cells","Alveolar macrophages"], ans:1, exp:"Type II alveolar cells (pneumocytes) produce surfactant. Surfactant reduces surface tension inside the alveoli, preventing them from collapsing between breaths."},
+  {q:"What is the main function of surfactant?", opts:["Increase surface tension to keep alveoli inflated","Reduce surface tension to prevent alveolar collapse","Filter bacteria from inhaled air","Transport oxygen across the alveolar membrane"], ans:1, exp:"Surfactant reduces surface tension inside the alveoli. Without it, the alveoli would collapse with each exhale because the moist inner surfaces would stick together."},
+  {q:"A premature infant with Respiratory Distress Syndrome (RDS) lacks:", opts:["Enough diaphragm strength","Adequate surfactant production","Fully developed bronchi","Sufficient tidal volume"], ans:1, exp:"RDS in premature infants is caused by insufficient surfactant. Without surfactant, alveoli collapse after each breath, requiring enormous effort to re-inflate, leading to respiratory failure."},
+  {q:"Bronchioles differ from bronchi in that bronchioles:", opts:["Have C-shaped cartilage rings","Are only found in the right lung","Lack cartilage and can dilate or constrict","Are larger and carry more air"], ans:2, exp:"Bronchioles are small airways without cartilage. Their smooth muscle walls allow them to dilate (bronchodilation) or constrict (bronchoconstriction), which is why asthma medications target them."},
+  {q:"The term 'hypoxemia' specifically refers to:", opts:["Low oxygen in the tissues","Low oxygen in the blood","High CO₂ in the blood","Low CO₂ in the tissues"], ans:1, exp:"Hypoxemia = low oxygen in the blood (-emia = blood). Hypoxia = low oxygen at the tissue level. These are different: a patient can be hypoxemic without yet being hypoxic, or vice versa."},
+  {q:"Hyperventilation (breathing too fast) causes:", opts:["Respiratory acidosis from CO₂ buildup","Respiratory alkalosis from too much CO₂ exhaled","Metabolic acidosis from lactic acid","Metabolic alkalosis from bicarbonate loss"], ans:1, exp:"Hyperventilation blows off excess CO₂. CO₂ dissolved in blood forms carbonic acid, so less CO₂ means less acid → blood pH rises → respiratory alkalosis."},
+  {q:"During exhalation, what happens to the diaphragm?", opts:["It contracts and moves down","It stays in the same position","It relaxes and moves up","It expands outward"], ans:2, exp:"During exhalation the diaphragm relaxes and domes back upward to its resting position. This decreases chest cavity volume, raises pressure, and forces air out."},
+  {q:"Tidal volume refers to:", opts:["The maximum air exhaled forcefully","Air always remaining in the lungs after exhaling","The air inhaled and exhaled in a normal, quiet breath","The total lung capacity at full inflation"], ans:2, exp:"Tidal volume (~500 mL in adults) is the amount of air moved in and out during one normal, relaxed breath. It's used to monitor ventilation in clinical settings."},
+  {q:"Why do alveoli have such thin walls?", opts:["To withstand high pressure from the diaphragm","To allow rapid gas exchange by diffusion","To prevent moisture loss during exhalation","To block bacteria from entering the blood"], ans:1, exp:"Alveolar walls are only one cell thick to minimize the diffusion distance for gases. The shorter the distance, the faster O₂ can enter the blood and CO₂ can exit."},
+  {q:"Which statement correctly describes the relationship between lung volume and pressure?", opts:["Increasing volume increases pressure","Decreasing volume decreases pressure","Increasing volume decreases pressure","Volume and pressure are unrelated in the lungs"], ans:2, exp:"This is Boyle's Law: at constant temperature, pressure and volume are inversely related. When lung volume increases (inhalation), pressure drops — air flows in. When volume decreases (exhalation), pressure rises — air flows out."}
+];
+
+let cur = 0, answered = false, score = 0, started = false;
+const total = questions.length;
+
+function sw(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'quiz' && !started) { started = true; renderQ(); }
+}
+
+function renderQ() {
+  answered = false;
+  const q = questions[cur];
+  const pct = cur === 0 ? 0 : Math.round(score / cur * 100);
+  document.getElementById('qbox').innerHTML = `
+    <div class="card">
+      <div class="q-meta">
+        <span>Question ${cur + 1} of ${total}</span>
+        <span>Score: ${score} / ${cur}</span>
+      </div>
+      <div class="score-track"><div class="score-fill" style="width:${pct}%"></div></div>
+      <p class="q-text" style="margin-top:14px;">${q.q}</p>
+      <div class="opts">${q.opts.map((o, i) => `<button class="opt" onclick="choose(${i})" id="o${i}">${o}</button>`).join('')}</div>
+      <div class="explain" id="exp"><strong>Explanation:</strong> ${q.exp}</div>
+      <div class="q-nav">
+        <button class="nav-btn" onclick="prev()" ${cur === 0 ? 'disabled' : ''}>← Prev</button>
+        <button class="nav-btn" onclick="next()" ${cur === total - 1 ? 'disabled' : ''}>Next →</button>
+      </div>
+    </div>`;
+}
+
+function choose(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[cur];
+  if (i === q.ans) score++;
+  document.querySelectorAll('.opt').forEach((el, idx) => {
+    el.disabled = true;
+    if (idx === q.ans) el.classList.add('correct');
+    else if (idx === i && i !== q.ans) el.classList.add('wrong');
+  });
+  document.getElementById('exp').style.display = 'block';
+}
+
+function next() {
+  if (cur < total - 1) { cur++; renderQ(); }
+  else showResult();
+}
+
+function prev() {
+  if (cur > 0) { cur--; renderQ(); }
+}
+
+function showResult() {
+  const pct = Math.round(score / total * 100);
+  let msg = pct >= 85
+    ? "Excellent work, Lauren! Your lungs are full of knowledge — on to Day 3!"
+    : pct >= 70
+    ? "Good effort! Review the questions you missed, then move on to Day 3."
+    : "Keep going — re-read the study notes and retake the quiz. You've got this, Lauren!";
+  document.getElementById('qbox').innerHTML = `
+    <div class="result-card">
+      <div class="result-score-num">${score} / ${total}</div>
+      <div class="result-pct">${pct}%</div>
+      <p class="result-msg">${msg}</p>
+      <div class="score-track" style="max-width:280px; margin:0 auto 1.5rem;"><div class="score-fill" style="width:${pct}%"></div></div>
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="restart()">Retake quiz</button>
+        <button class="btn-primary" onclick="goStudy()">Review notes</button>
+      </div>
+    </div>`;
+}
+
+function restart() { cur = 0; score = 0; renderQ(); }
+function goStudy() { sw('study', document.querySelectorAll('.tab')[0]); }
+</script>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:space-between;">
+  <a href="index.html" style="padding:10px 20px;border-radius:8px;border:2px solid #dde2f0;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#1a2744;text-decoration:none;">← Day 1</a>
+  <a href="lauren-hesi-day3.html" style="padding:10px 20px;border-radius:8px;background:#1a2744;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:white;text-decoration:none;">Day 3 →</a>
+</div>
+</body>
+</html>
