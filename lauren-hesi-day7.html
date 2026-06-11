@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lauren's HESI Study Plan – Day 7</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f2044;
+    --navy-mid: #1a3460;
+    --navy-light: #2a4a80;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f8f6f1;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --text-muted: #5a6480;
+    --border: #dde3ef;
+    --success: #2d7a4f;
+    --success-bg: #e8f5ee;
+    --error: #b83232;
+    --error-bg: #fdf0f0;
+    --warning: #b86a00;
+    --warning-bg: #fff4e0;
+    --card-shadow: 0 2px 12px rgba(15,32,68,0.08);
+    --radius: 10px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
+    color: var(--white);
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .header h1 span {
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 6px;
+  }
+  .score-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 110px;
+    flex-shrink: 0;
+  }
+  .score-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 2px; }
+  .score-value { font-size: 26px; font-weight: 700; color: var(--white); font-family: 'Playfair Display', serif; }
+  .score-sub { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* Progress dots */
+  .progress-row {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .progress-label { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; margin-right: 4px; }
+  .dot-group { display: flex; gap: 6px; align-items: center; }
+  .dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600;
+    border: 2px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .dot.done {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+  .dot.today {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+  }
+  .dot-connector { width: 16px; height: 2px; background: rgba(255,255,255,0.2); border-radius: 1px; }
+  .dot-connector.done { background: var(--gold); }
+
+  /* Meta row */
+  .meta-row {
+    margin-top: 14px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px; color: rgba(255,255,255,0.75);
+  }
+  .meta-chip svg { opacity: 0.7; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    background: var(--navy);
+    display: flex;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+    gap: 4px;
+  }
+  .tab-btn {
+    padding: 14px 24px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.85); }
+  .tab-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 32px 60px;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── STUDY NOTES ── */
+  .notes-intro {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .notes-intro strong { color: var(--text); }
+
+  .day-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--white);
+    transition: background 0.15s;
+  }
+  .day-header:hover { background: #f5f7fc; }
+  .day-num {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .day-title-group { flex: 1; }
+  .day-title { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .day-topic { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .day-chevron {
+    font-size: 18px; color: var(--text-muted);
+    transition: transform 0.25s;
+  }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+  .day-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .day-card.open .day-body { display: block; }
+
+  .key-terms {
+    margin-top: 16px;
+  }
+  .key-terms h4 {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .term-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+  }
+  .term-item {
+    background: #f5f7fc;
+    border-radius: 7px;
+    padding: 10px 12px;
+  }
+  .term-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .term-def { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+  .tip-box {
+    background: #fffbf0;
+    border: 1px solid #f0d98a;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: #6b5300;
+    line-height: 1.6;
+  }
+  .tip-box strong { color: #4a3800; }
+
+  .formula-list {
+    margin-top: 14px;
+    list-style: none;
+  }
+  .formula-list li {
+    background: #f0f4ff;
+    border-left: 3px solid var(--navy-light);
+    padding: 9px 14px;
+    margin-bottom: 6px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: 'Inter', monospace;
+  }
+  .formula-list li strong { color: var(--navy); }
+
+  .bullet-notes {
+    margin-top: 12px;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .bullet-notes li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .bullet-notes li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-header-bar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: var(--card-shadow);
+  }
+  .quiz-header-bar h2 { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .quiz-header-bar p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .quiz-stats { display: flex; gap: 16px; }
+  .quiz-stat { text-align: center; }
+  .quiz-stat .val { font-size: 22px; font-weight: 700; color: var(--navy); font-family: 'Playfair Display', serif; }
+  .quiz-stat .lbl { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .question-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.2s;
+  }
+  .question-card.answered { border-color: #b8c8e8; }
+  .question-card.correct { border-color: #2d7a4f; background: #fafffe; }
+  .question-card.incorrect { border-color: #b83232; background: #fffafa; }
+
+  .q-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  .q-num { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+  .q-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 2px 9px; border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .tag-cardio { background: #ffe4e4; color: #8b1a1a; }
+  .tag-resp { background: #e4f0ff; color: #0a3d7a; }
+  .tag-digest { background: #e8f5ee; color: #1a5c34; }
+  .tag-urinary { background: #fff0d4; color: #6b3800; }
+  .tag-vocab { background: #f0e8ff; color: #4a1a8b; }
+  .tag-math { background: #e8f0ff; color: #1a3a8b; }
+
+  .q-text {
+    font-size: 15px; font-weight: 500; line-height: 1.55;
+    color: var(--text); margin-bottom: 14px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 11px 14px;
+    background: #f6f8fc;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.45;
+  }
+  .option-btn:hover:not(:disabled) {
+    background: #edf1fb;
+    border-color: var(--navy-light);
+  }
+  .option-btn .opt-letter {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+  }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.selected { background: #e8eef8; border-color: var(--navy-mid); }
+  .option-btn.selected .opt-letter { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .option-btn.correct-ans { background: var(--success-bg); border-color: var(--success); }
+  .option-btn.correct-ans .opt-letter { background: var(--success); border-color: var(--success); color: var(--white); }
+  .option-btn.wrong-ans { background: var(--error-bg); border-color: var(--error); }
+  .option-btn.wrong-ans .opt-letter { background: var(--error); border-color: var(--error); color: var(--white); }
+
+  .feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.55;
+    display: none;
+  }
+  .feedback.visible { display: block; }
+  .feedback.correct { background: var(--success-bg); color: var(--success); }
+  .feedback.incorrect { background: var(--error-bg); color: var(--error); }
+  .feedback strong { display: block; margin-bottom: 3px; }
+
+  /* Quiz controls */
+  .quiz-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .btn-submit, .btn-reset {
+    padding: 14px 36px;
+    border: none; border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-submit {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .btn-submit:hover { background: var(--navy-mid); transform: translateY(-1px); }
+  .btn-submit:disabled { background: #9babc4; cursor: not-allowed; transform: none; }
+  .btn-reset {
+    background: var(--white);
+    color: var(--navy);
+    border: 1.5px solid var(--border);
+  }
+  .btn-reset:hover { background: #f0f3fa; }
+
+  /* Results */
+  .results-panel {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: var(--card-shadow);
+  }
+  .results-panel.visible { display: block; }
+  .result-score-ring {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    margin: 0 auto 20px;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+  }
+  .result-score-ring .big-num { font-size: 32px; font-weight: 700; line-height: 1; }
+  .result-score-ring .out-of { font-size: 13px; color: var(--text-muted); }
+  .result-grade { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .result-msg { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 440px; margin: 0 auto; }
+  .result-breakdown {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    text-align: center;
+  }
+  .rb-item { background: #f6f8fc; border-radius: 8px; padding: 12px 8px; }
+  .rb-item .rb-val { font-size: 20px; font-weight: 700; color: var(--navy); }
+  .rb-item .rb-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Progress bar */
+  .progress-wrap { margin-bottom: 20px; }
+  .progress-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .progress-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--navy-mid), var(--gold)); border-radius: 3px; transition: width 0.3s ease; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .header, .tab-bar, .main { padding-left: 16px; padding-right: 16px; }
+    .tab-btn { padding: 12px 14px; font-size: 12px; }
+    .term-grid { grid-template-columns: 1fr; }
+    .quiz-stats { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">HESI A² Prep</div>
+        <h1>Lauren's Study Plan — <span>Day 7</span></h1>
+        <div class="header-sub">Final Review &amp; Full Practice Test · All Topics Combined</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-label">Diagnostic</div>
+        <div class="score-value">33/50</div>
+        <div class="score-sub">Starting Score</div>
+      </div>
+    </div>
+
+    <div class="progress-row">
+      <span class="progress-label">Week Progress</span>
+      <div class="dot-group">
+        <div class="dot done">1</div>
+        <div class="dot-connector done"></div>
+        <div class="dot done">2</div>
+        <div class="dot-connector done"></div>
+        <div class="dot done">3</div>
+        <div class="dot-connector done"></div>
+        <div class="dot done">4</div>
+        <div class="dot-connector done"></div>
+        <div class="dot done">5</div>
+        <div class="dot-connector done"></div>
+        <div class="dot done">6</div>
+        <div class="dot-connector done"></div>
+        <div class="dot today">7</div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        60–90 min
+      </div>
+      <div class="meta-chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        30 Practice Questions
+      </div>
+      <div class="meta-chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Day 7 of 7 — Final Day
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('notes', this)">📋 Study Notes</button>
+  <button class="tab-btn" onclick="switchTab('quiz', this)">✏️ Practice Test</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ══════════ STUDY NOTES TAB ══════════ -->
+  <div class="tab-panel active" id="panel-notes">
+    <div class="notes-intro">
+      <strong>Day 7 — Quick-Reference Master Review.</strong> Use this as your final sweep before the practice test. Each section below condenses the most-tested concepts from Days 1–6. Click any day to expand its key terms and exam tips. Spend about 20–25 minutes here, then move to the Practice Test tab.
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-card open" id="card1">
+      <div class="day-header" onclick="toggleCard('card1')">
+        <div class="day-num">1</div>
+        <div class="day-title-group">
+          <div class="day-title">Cardiovascular System</div>
+          <div class="day-topic">Heart anatomy, circulation, blood pressure, cardiac conditions</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>Key Terms</h4>
+          <div class="term-grid">
+            <div class="term-item"><div class="term-name">Systole / Diastole</div><div class="term-def">Systole = heart contracts &amp; pumps. Diastole = heart relaxes &amp; fills. Normal BP: ~120/80 mmHg.</div></div>
+            <div class="term-item"><div class="term-name">Myocardial Infarction</div><div class="term-def">Heart attack; blockage of coronary artery causing heart muscle death. Classic symptom: crushing chest pain radiating to left arm/jaw.</div></div>
+            <div class="term-item"><div class="term-name">Atrial Fibrillation</div><div class="term-def">Irregular, often rapid heart rate. Increases stroke risk. Managed with anticoagulants (warfarin, heparin).</div></div>
+            <div class="term-item"><div class="term-name">Cardiac Output</div><div class="term-def">CO = Heart Rate × Stroke Volume. Normal ~5 L/min. Decreases in heart failure.</div></div>
+            <div class="term-item"><div class="term-name">Sinoatrial (SA) Node</div><div class="term-def">The heart's natural pacemaker, located in the right atrium. Sets resting HR of 60–100 bpm.</div></div>
+            <div class="term-item"><div class="term-name">Congestive Heart Failure</div><div class="term-def">Heart cannot pump enough blood. Left-sided: pulmonary edema. Right-sided: peripheral edema, JVD.</div></div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> Know blood flow order: <em>Body → Right Atrium → Right Ventricle → Pulmonary Artery → Lungs → Pulmonary Veins → Left Atrium → Left Ventricle → Aorta → Body.</em> This is frequently tested!
+        </div>
+        <ul class="bullet-notes">
+          <li>Coronary arteries supply blood TO the heart muscle (not chambers)</li>
+          <li>Hypertension = silent killer; can lead to stroke, MI, kidney damage</li>
+          <li>Bradycardia &lt;60 bpm; Tachycardia &gt;100 bpm</li>
+          <li>Peripheral vascular disease: poor circulation, often in legs</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-card" id="card2">
+      <div class="day-header" onclick="toggleCard('card2')">
+        <div class="day-num">2</div>
+        <div class="day-title-group">
+          <div class="day-title">Respiratory System</div>
+          <div class="day-topic">Lung anatomy, gas exchange, breathing disorders, respiratory medications</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>Key Terms</h4>
+          <div class="term-grid">
+            <div class="term-item"><div class="term-name">Alveoli</div><div class="term-def">Tiny air sacs where gas exchange occurs. O₂ enters blood; CO₂ exits. Coated in surfactant to prevent collapse.</div></div>
+            <div class="term-item"><div class="term-name">COPD</div><div class="term-def">Chronic Obstructive Pulmonary Disease — umbrella term for emphysema &amp; chronic bronchitis. Caused mainly by smoking.</div></div>
+            <div class="term-item"><div class="term-name">Tidal Volume</div><div class="term-def">Amount of air inhaled/exhaled in one normal breath. ~500 mL in adults.</div></div>
+            <div class="term-item"><div class="term-name">Hypoxia vs. Hypercapnia</div><div class="term-def">Hypoxia = low O₂. Hypercapnia = high CO₂. Both cause respiratory distress; symptoms overlap.</div></div>
+            <div class="term-item"><div class="term-name">Pneumothorax</div><div class="term-def">Air in the pleural space causing lung collapse. Tension pneumothorax is life-threatening — tracheal deviation away from affected side.</div></div>
+            <div class="term-item"><div class="term-name">Asthma</div><div class="term-def">Reversible airway obstruction with bronchospasm. Treat acute attacks with short-acting beta-agonists (albuterol). Prevent with steroids.</div></div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> The breathing pathway: <em>Nose/Mouth → Pharynx → Larynx → Trachea → Bronchi → Bronchioles → Alveoli.</em> "COPD patients drive with low O₂" — they rely on hypoxic drive, so giving high O₂ can suppress their breathing.
+        </div>
+        <ul class="bullet-notes">
+          <li>Diaphragm is the primary muscle of breathing; contracts on inhalation</li>
+          <li>Pulse oximetry (SpO₂): normal is 95–100%; below 90% is concerning</li>
+          <li>Cystic fibrosis: thick mucus; respiratory &amp; digestive complications</li>
+          <li>Orthopnea: difficulty breathing when lying flat (classic HF or COPD symptom)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-card" id="card3">
+      <div class="day-header" onclick="toggleCard('card3')">
+        <div class="day-num">3</div>
+        <div class="day-title-group">
+          <div class="day-title">Digestive System</div>
+          <div class="day-topic">GI anatomy, digestion, liver/pancreas, GI disorders</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>Key Terms</h4>
+          <div class="term-grid">
+            <div class="term-item"><div class="term-name">Peristalsis</div><div class="term-def">Wave-like muscular contractions that move food through the GI tract. Slowed by opioids (causing constipation).</div></div>
+            <div class="term-item"><div class="term-name">Peptic Ulcer</div><div class="term-def">Erosion in stomach or duodenal lining. Most caused by H. pylori or NSAIDs. Symptoms: burning epigastric pain.</div></div>
+            <div class="term-item"><div class="term-name">Liver Functions</div><div class="term-def">Detoxifies blood, makes bile, stores glycogen, produces clotting factors, metabolizes medications.</div></div>
+            <div class="term-item"><div class="term-name">Pancreatitis</div><div class="term-def">Inflammation of the pancreas. Common causes: gallstones, alcohol. Signs: severe epigastric pain radiating to the back.</div></div>
+            <div class="term-item"><div class="term-name">Small vs. Large Intestine</div><div class="term-def">Small intestine: absorbs nutrients (3 parts: duodenum, jejunum, ileum). Large intestine: absorbs water, forms stool.</div></div>
+            <div class="term-item"><div class="term-name">Jaundice</div><div class="term-def">Yellow skin/sclera from elevated bilirubin. Sign of liver disease, bile duct obstruction, or hemolysis.</div></div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> Digestion order: <em>Mouth (salivary amylase) → Esophagus → Stomach (pepsin, HCl) → Small Intestine (most absorption) → Large Intestine (water) → Rectum → Anus.</em> The liver and pancreas are accessory organs.
+        </div>
+        <ul class="bullet-notes">
+          <li>Appendix: right lower quadrant; appendicitis pain migrates to McBurney's point</li>
+          <li>Crohn's (any GI segment) vs. Ulcerative Colitis (colon only, continuous)</li>
+          <li>Cirrhosis: irreversible liver scarring; can lead to portal hypertension, ascites</li>
+          <li>Cholecystitis: gallbladder inflammation; right upper quadrant pain after fatty meals</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-card" id="card4">
+      <div class="day-header" onclick="toggleCard('card4')">
+        <div class="day-num">4</div>
+        <div class="day-title-group">
+          <div class="day-title">Urinary System</div>
+          <div class="day-topic">Kidney anatomy, urine formation, fluid balance, renal disorders</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>Key Terms</h4>
+          <div class="term-grid">
+            <div class="term-item"><div class="term-name">Nephron</div><div class="term-def">Functional unit of the kidney. Filters blood to form urine. Each kidney has ~1 million nephrons.</div></div>
+            <div class="term-item"><div class="term-name">GFR (Glomerular Filtration Rate)</div><div class="term-def">Measures how well kidneys filter blood. Normal ~90–120 mL/min. Decreases in renal failure.</div></div>
+            <div class="term-item"><div class="term-name">Oliguria vs. Anuria</div><div class="term-def">Oliguria: &lt;400 mL urine/day. Anuria: &lt;50 mL/day. Both indicate kidney problems or severe dehydration.</div></div>
+            <div class="term-item"><div class="term-name">ADH (Antidiuretic Hormone)</div><div class="term-def">Released when dehydrated; causes kidneys to reabsorb water, concentrating urine. Absence causes diabetes insipidus.</div></div>
+            <div class="term-item"><div class="term-name">Acute vs. Chronic Kidney Failure</div><div class="term-def">Acute: sudden onset, often reversible. Chronic (CKD): gradual, progressive. Both cause azotemia (elevated BUN/creatinine).</div></div>
+            <div class="term-item"><div class="term-name">UTI</div><div class="term-def">Urinary tract infection. Dysuria, frequency, urgency. E. coli is the most common cause. Women are more susceptible.</div></div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> Urine formation = Filtration → Reabsorption → Secretion → Excretion. Know that the kidneys regulate <em>blood pressure</em> (via renin-angiotensin system), <em>fluid balance</em>, <em>electrolytes</em>, and <em>acid-base balance</em>.
+        </div>
+        <ul class="bullet-notes">
+          <li>Urine pathway: Kidney → Ureter → Bladder → Urethra</li>
+          <li>Dialysis: hemodialysis filters blood externally; peritoneal uses abdominal cavity</li>
+          <li>Renal calculi (kidney stones): severe flank pain, hematuria; calcium oxalate most common</li>
+          <li>Normal urine output: 30 mL/hr minimum indicates adequate perfusion</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-card" id="card5">
+      <div class="day-header" onclick="toggleCard('card5')">
+        <div class="day-num">5</div>
+        <div class="day-title-group">
+          <div class="day-title">Vocabulary</div>
+          <div class="day-topic">Medical prefixes, suffixes, roots, and healthcare terminology</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>High-Frequency Prefixes &amp; Suffixes</h4>
+          <div class="term-grid">
+            <div class="term-item"><div class="term-name">brady- / tachy-</div><div class="term-def">Brady = slow (bradycardia). Tachy = fast (tachypnea). Opposite pair — know both.</div></div>
+            <div class="term-item"><div class="term-name">-itis / -osis / -emia</div><div class="term-def">-itis = inflammation. -osis = abnormal condition. -emia = blood condition (e.g., anemia, hyperglycemia).</div></div>
+            <div class="term-item"><div class="term-name">hyper- / hypo-</div><div class="term-def">Hyper = above normal (hypertension). Hypo = below normal (hypoglycemia). Extremely common on HESI.</div></div>
+            <div class="term-item"><div class="term-name">-ectomy / -otomy / -ostomy</div><div class="term-def">-ectomy = removal. -otomy = incision. -ostomy = surgical opening. (appendectomy, tracheotomy, colostomy)</div></div>
+            <div class="term-item"><div class="term-name">nephro- / cardio- / pulmo-</div><div class="term-def">Nephro = kidney. Cardio = heart. Pulmo/pneumo = lung. Root identifies the organ system.</div></div>
+            <div class="term-item"><div class="term-name">-pnea / -phagia / -uria</div><div class="term-def">-pnea = breathing. -phagia = swallowing/eating. -uria = urine condition (e.g., hematuria, proteinuria).</div></div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> Break unfamiliar words into root + prefix + suffix. Example: "hyperkalemia" = hyper (high) + kal (potassium) + emia (in blood) = high potassium in blood. This strategy works on almost every unknown vocabulary word.
+        </div>
+        <ul class="bullet-notes">
+          <li>Dyspnea = difficulty breathing; dysphagia = difficulty swallowing</li>
+          <li>Diuresis = increased urine output; diuretics promote this</li>
+          <li>Edema = excess fluid in tissues; pitting vs. non-pitting</li>
+          <li>Erythrocytes = red blood cells; leukocytes = white blood cells; thrombocytes = platelets</li>
+          <li>Proximal (closer to origin) vs. Distal (farther from origin)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day-card" id="card6">
+      <div class="day-header" onclick="toggleCard('card6')">
+        <div class="day-num">6</div>
+        <div class="day-title-group">
+          <div class="day-title">Math</div>
+          <div class="day-topic">Dosage calculations, ratios, fractions, percentages, conversions</div>
+        </div>
+        <div class="day-chevron">⌄</div>
+      </div>
+      <div class="day-body">
+        <div class="key-terms">
+          <h4>Essential Formulas</h4>
+        </div>
+        <ul class="formula-list">
+          <li><strong>Dosage Calc:</strong> Desired Dose ÷ Dose on Hand × Quantity = Amount to Give</li>
+          <li><strong>IV Flow Rate:</strong> (Volume in mL × Drop Factor) ÷ Time in Minutes = gtt/min</li>
+          <li><strong>Percent:</strong> Part ÷ Whole × 100 = %</li>
+          <li><strong>Ratio/Proportion:</strong> A/B = C/D → cross-multiply to solve for unknown</li>
+          <li><strong>Weight-Based Dosing:</strong> mg/kg × patient weight (kg) = total dose in mg</li>
+          <li><strong>Unit Conversions:</strong> 1 kg = 2.2 lb · 1 tsp = 5 mL · 1 tbsp = 15 mL · 1 oz = 30 mL</li>
+        </ul>
+        <div class="tip-box">
+          <strong>🎯 Exam Tip:</strong> ALWAYS include units in every step — they cancel correctly and alert you to errors. If you have mg/mL × mL, the mL cancels and you're left with mg. Show your work on scratch paper even for seemingly simple problems.
+        </div>
+        <ul class="bullet-notes">
+          <li>Temperature: °F = (°C × 9/5) + 32 · Normal body temp: 98.6°F = 37°C</li>
+          <li>To convert lbs to kg: divide by 2.2 · To convert kg to lbs: multiply by 2.2</li>
+          <li>Roman numerals: I=1, V=5, X=10, L=50, C=100 (used in some medication orders)</li>
+          <li>Fractions → decimals: divide numerator ÷ denominator (3/4 = 0.75 = 75%)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ QUIZ TAB ══════════ -->
+  <div class="tab-panel" id="panel-quiz">
+
+    <div id="results-panel" class="results-panel">
+      <div class="result-score-ring" id="scoreRing">
+        <div class="big-num" id="scoreFraction">—</div>
+        <div class="out-of" id="scorePercent">—</div>
+      </div>
+      <div class="result-grade" id="resultGrade"></div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-breakdown" id="resultBreakdown"></div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div>
+        <h2>Final Mixed Practice Test</h2>
+        <p>30 questions · All topics covered · Select your answer to reveal feedback</p>
+      </div>
+      <div class="quiz-stats">
+        <div class="quiz-stat"><div class="val" id="statAnswered">0</div><div class="lbl">Answered</div></div>
+        <div class="quiz-stat"><div class="val" id="statCorrect">0</div><div class="lbl">Correct</div></div>
+        <div class="quiz-stat"><div class="val">30</div><div class="lbl">Total</div></div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="progressLabel">0 of 30 answered</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <div class="quiz-controls">
+      <button class="btn-submit" id="submitBtn" onclick="submitQuiz()" disabled>Submit Test</button>
+      <button class="btn-reset" onclick="resetQuiz()">Reset</button>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── ACCORDION ──
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ── QUIZ DATA ──
+const questions = [
+  // CARDIOVASCULAR (5)
+  {
+    q: "What is the correct order of blood flow through the heart?",
+    tag: "Cardiovascular", tagClass: "tag-cardio",
+    options: [
+      "Right atrium → Right ventricle → Pulmonary artery → Lungs → Pulmonary veins → Left atrium → Left ventricle → Aorta",
+      "Left atrium → Left ventricle → Pulmonary artery → Lungs → Right atrium → Right ventricle → Aorta",
+      "Right ventricle → Aorta → Body → Left atrium → Left ventricle → Pulmonary artery",
+      "Left ventricle → Pulmonary vein → Lungs → Right ventricle → Right atrium → Aorta"
+    ],
+    answer: 0,
+    explanation: "Blood enters the right side of the heart from the body, travels through the pulmonary circuit to the lungs for oxygenation, then returns to the left side and is pumped out to the body via the aorta."
+  },
+  {
+    q: "A patient presents with crushing chest pain radiating to the left arm and jaw, diaphoresis, and nausea. Which condition is most likely?",
+    tag: "Cardiovascular", tagClass: "tag-cardio",
+    options: ["Atrial fibrillation", "Myocardial infarction", "Pulmonary embolism", "Aortic dissection"],
+    answer: 1,
+    explanation: "Classic MI symptoms include crushing chest pain radiating to the left arm/jaw, sweating (diaphoresis), and nausea. Immediate action and ECG are required."
+  },
+  {
+    q: "What is cardiac output?",
+    tag: "Cardiovascular", tagClass: "tag-cardio",
+    options: [
+      "The amount of blood pumped per heartbeat",
+      "Heart rate multiplied by stroke volume",
+      "Systolic pressure minus diastolic pressure",
+      "The pressure in the pulmonary arteries"
+    ],
+    answer: 1,
+    explanation: "Cardiac Output (CO) = Heart Rate × Stroke Volume. Normal cardiac output is approximately 4–8 liters per minute at rest."
+  },
+  {
+    q: "A patient is in atrial fibrillation. What is the primary concern with this rhythm?",
+    tag: "Cardiovascular", tagClass: "tag-cardio",
+    options: ["Hypoglycemia risk", "Increased stroke risk from blood clots", "Respiratory failure", "Kidney damage from low flow"],
+    answer: 1,
+    explanation: "A-fib causes irregular, ineffective atrial contractions, which can cause blood to pool and clot in the atria. These clots can travel to the brain, causing a stroke. Anticoagulation is essential."
+  },
+  {
+    q: "Which finding is most consistent with right-sided heart failure?",
+    tag: "Cardiovascular", tagClass: "tag-cardio",
+    options: ["Pulmonary edema", "Peripheral edema and jugular vein distension", "Orthopnea", "Frothy pink sputum"],
+    answer: 1,
+    explanation: "Right-sided heart failure causes backup of blood into the systemic venous circulation, resulting in peripheral edema (legs/ankles) and jugular vein distension (JVD). Left-sided failure causes pulmonary congestion."
+  },
+  // RESPIRATORY (5)
+  {
+    q: "Where does gas exchange occur in the lungs?",
+    tag: "Respiratory", tagClass: "tag-resp",
+    options: ["Bronchioles", "Trachea", "Alveoli", "Bronchi"],
+    answer: 2,
+    explanation: "The alveoli are tiny air sacs surrounded by capillaries where O₂ diffuses into the blood and CO₂ diffuses out. Their enormous surface area makes efficient gas exchange possible."
+  },
+  {
+    q: "A COPD patient on 2L O₂ suddenly becomes less responsive. The nurse suspects oxygen-induced hypercapnia. This occurs because:",
+    tag: "Respiratory", tagClass: "tag-resp",
+    options: [
+      "Oxygen destroys alveoli",
+      "COPD patients rely on hypoxic drive to breathe; high O₂ removes that stimulus",
+      "Oxygen causes bronchospasm in COPD",
+      "High O₂ increases CO₂ production"
+    ],
+    answer: 1,
+    explanation: "Chronic COPD patients have chronically elevated CO₂, so they adapt to use low O₂ as their breathing stimulus (hypoxic drive). Giving high O₂ can eliminate this drive and suppress respirations."
+  },
+  {
+    q: "What medication class is used for acute asthma attacks?",
+    tag: "Respiratory", tagClass: "tag-resp",
+    options: ["Inhaled corticosteroids", "Short-acting beta-agonists (e.g., albuterol)", "Antihistamines", "Anticholinergics"],
+    answer: 1,
+    explanation: "Short-acting beta-agonists (SABAs) like albuterol cause rapid bronchodilation and are the first-line treatment for acute asthma. Inhaled steroids are for long-term prevention, not acute relief."
+  },
+  {
+    q: "A patient with a pneumothorax shows tracheal deviation away from the affected side. This indicates:",
+    tag: "Respiratory", tagClass: "tag-resp",
+    options: ["Simple pneumothorax", "Atelectasis", "Tension pneumothorax — a life-threatening emergency", "Pleural effusion"],
+    answer: 2,
+    explanation: "Tracheal deviation away from the affected side indicates tension pneumothorax, where air continuously accumulates and shifts mediastinal structures. This compresses the heart and great vessels — it is a medical emergency."
+  },
+  {
+    q: "What is the normal oxygen saturation (SpO₂) range in a healthy adult?",
+    tag: "Respiratory", tagClass: "tag-resp",
+    options: ["85–90%", "90–94%", "95–100%", "88–92%"],
+    answer: 2,
+    explanation: "Normal SpO₂ is 95–100%. A reading below 90% is generally considered hypoxic and requires intervention. COPD patients may tolerate 88–92% as their normal baseline."
+  },
+  // DIGESTIVE (5)
+  {
+    q: "Which organ produces bile, stores glycogen, and metabolizes medications?",
+    tag: "Digestive", tagClass: "tag-digest",
+    options: ["Pancreas", "Liver", "Gallbladder", "Small intestine"],
+    answer: 1,
+    explanation: "The liver performs hundreds of functions including bile production, glycogen storage, medication metabolism, clotting factor synthesis, and detoxification of blood."
+  },
+  {
+    q: "Where does the majority of nutrient absorption occur in the GI tract?",
+    tag: "Digestive", tagClass: "tag-digest",
+    options: ["Stomach", "Large intestine", "Small intestine", "Duodenum only"],
+    answer: 2,
+    explanation: "The small intestine (duodenum, jejunum, ileum) is the primary site of nutrient absorption. The large intestine mainly absorbs water and electrolytes."
+  },
+  {
+    q: "A patient has right upper quadrant pain that worsens after eating fatty meals. Which condition is most likely?",
+    tag: "Digestive", tagClass: "tag-digest",
+    options: ["Appendicitis", "Pancreatitis", "Cholecystitis (gallbladder inflammation)", "Peptic ulcer"],
+    answer: 2,
+    explanation: "Cholecystitis causes right upper quadrant pain that characteristically worsens after fatty meals because fat stimulates gallbladder contraction against an inflamed or obstructed gallbladder."
+  },
+  {
+    q: "What is the main difference between Crohn's disease and ulcerative colitis?",
+    tag: "Digestive", tagClass: "tag-digest",
+    options: [
+      "Crohn's only affects the rectum; UC affects the entire GI tract",
+      "Crohn's can affect any part of the GI tract; UC affects only the colon in a continuous pattern",
+      "Crohn's causes bloody stool only; UC causes only weight loss",
+      "There is no clinical difference"
+    ],
+    answer: 1,
+    explanation: "Crohn's disease can affect any segment of the GI tract in a patchy 'skip lesion' pattern. Ulcerative colitis affects the colon in a continuous, uninterrupted pattern starting from the rectum."
+  },
+  {
+    q: "Jaundice (yellowing of skin and sclera) is caused by elevated levels of:",
+    tag: "Digestive", tagClass: "tag-digest",
+    options: ["Creatinine", "Bilirubin", "Urea nitrogen", "Troponin"],
+    answer: 1,
+    explanation: "Jaundice results from elevated bilirubin, a byproduct of red blood cell breakdown. It may indicate liver disease, bile duct obstruction, or excessive hemolysis."
+  },
+  // URINARY (5)
+  {
+    q: "What is the functional unit of the kidney?",
+    tag: "Urinary", tagClass: "tag-urinary",
+    options: ["Glomerulus", "Nephron", "Collecting duct", "Loop of Henle"],
+    answer: 1,
+    explanation: "The nephron is the functional unit of the kidney. Each kidney contains approximately 1 million nephrons, and each nephron consists of the glomerulus, tubules, and collecting duct."
+  },
+  {
+    q: "A nurse notes a patient's urine output is 20 mL/hour. The minimum acceptable urine output in an adult is:",
+    tag: "Urinary", tagClass: "tag-urinary",
+    options: ["10 mL/hr", "20 mL/hr", "30 mL/hr", "50 mL/hr"],
+    answer: 2,
+    explanation: "30 mL/hr (or 0.5 mL/kg/hr) is the minimum acceptable urine output indicating adequate kidney perfusion. Below this suggests oliguria, possibly from dehydration, shock, or acute kidney injury."
+  },
+  {
+    q: "ADH (antidiuretic hormone) is released in response to dehydration. Its primary function is to:",
+    tag: "Urinary", tagClass: "tag-urinary",
+    options: [
+      "Increase urine output to dilute the blood",
+      "Cause the kidneys to reabsorb water, concentrating urine",
+      "Increase sodium excretion",
+      "Dilate renal blood vessels"
+    ],
+    answer: 1,
+    explanation: "ADH signals the kidneys to reabsorb water back into the bloodstream, producing concentrated (darker) urine and helping restore fluid balance during dehydration."
+  },
+  {
+    q: "The most common cause of a urinary tract infection (UTI) is:",
+    tag: "Urinary", tagClass: "tag-urinary",
+    options: ["Staphylococcus aureus", "Klebsiella pneumoniae", "Escherichia coli (E. coli)", "Pseudomonas aeruginosa"],
+    answer: 2,
+    explanation: "E. coli causes approximately 80–85% of community-acquired UTIs. It normally lives in the bowel and can colonize the urinary tract, especially in women due to the short urethra."
+  },
+  {
+    q: "Which lab values are most directly elevated in kidney failure?",
+    tag: "Urinary", tagClass: "tag-urinary",
+    options: ["Troponin and CK-MB", "BUN (blood urea nitrogen) and creatinine", "ALT and AST", "Hemoglobin and hematocrit"],
+    answer: 1,
+    explanation: "BUN and creatinine are waste products normally filtered by the kidneys. When kidneys fail, these accumulate in the blood — a condition called azotemia. Creatinine is more specific for kidney function."
+  },
+  // VOCABULARY (5)
+  {
+    q: "The prefix 'brady-' means:",
+    tag: "Vocabulary", tagClass: "tag-vocab",
+    options: ["Fast", "Slow", "Absent", "Painful"],
+    answer: 1,
+    explanation: "'Brady-' means slow. Bradycardia = slow heart rate (<60 bpm). Bradypnea = slow breathing. The opposite prefix is 'tachy-' (fast)."
+  },
+  {
+    q: "The suffix '-ectomy' means:",
+    tag: "Vocabulary", tagClass: "tag-vocab",
+    options: ["Incision into", "Inflammation of", "Surgical removal of", "Abnormal condition"],
+    answer: 2,
+    explanation: "'-ectomy' means surgical removal. Example: appendectomy = removal of the appendix. Compare to '-otomy' (incision) and '-ostomy' (creating a surgical opening)."
+  },
+  {
+    q: "Which term means 'difficulty breathing'?",
+    tag: "Vocabulary", tagClass: "tag-vocab",
+    options: ["Dysphagia", "Dysuria", "Dyspnea", "Dysphasia"],
+    answer: 2,
+    explanation: "Dyspnea = difficult/labored breathing (dys = difficult; -pnea = breathing). Dysphagia = difficulty swallowing. Dysuria = painful urination. These similar terms are commonly confused on tests."
+  },
+  {
+    q: "What does 'hyperkalemia' mean?",
+    tag: "Vocabulary", tagClass: "tag-vocab",
+    options: [
+      "Low potassium in the blood",
+      "High potassium in the blood",
+      "Low calcium in the blood",
+      "High sodium in the blood"
+    ],
+    answer: 1,
+    explanation: "Hyper = high, kal = potassium, -emia = in the blood. Hyperkalemia = elevated potassium. This can cause dangerous cardiac arrhythmias and is monitored closely in kidney disease."
+  },
+  {
+    q: "The term 'distal' refers to a location that is:",
+    tag: "Vocabulary", tagClass: "tag-vocab",
+    options: [
+      "Closer to the point of origin or attachment",
+      "On the same side of the body as the injury",
+      "Farther from the point of origin or attachment",
+      "Located in the midline of the body"
+    ],
+    answer: 2,
+    explanation: "Distal = farther from the origin/point of attachment. Proximal = closer to the origin. Example: the wrist is distal to the elbow; the elbow is proximal to the wrist."
+  },
+  // MATH (5)
+  {
+    q: "A physician orders amoxicillin 500 mg. On hand: 250 mg/capsule. How many capsules should be given?",
+    tag: "Math", tagClass: "tag-math",
+    options: ["1 capsule", "1.5 capsules", "2 capsules", "3 capsules"],
+    answer: 2,
+    explanation: "Desired ÷ On Hand = 500 mg ÷ 250 mg/capsule = 2 capsules. Always check your units: mg ÷ (mg/capsule) = capsules. ✓"
+  },
+  {
+    q: "A patient weighs 176 lbs. What is their weight in kilograms?",
+    tag: "Math", tagClass: "tag-math",
+    options: ["60 kg", "80 kg", "88 kg", "100 kg"],
+    answer: 1,
+    explanation: "To convert pounds to kg: divide by 2.2. 176 ÷ 2.2 = 80 kg. This is essential for weight-based medication dosing."
+  },
+  {
+    q: "An IV is ordered at 125 mL/hr. The drop factor is 10 gtt/mL. What is the flow rate in gtt/min?",
+    tag: "Math", tagClass: "tag-math",
+    options: ["12.5 gtt/min", "20.8 gtt/min", "25 gtt/min", "15 gtt/min"],
+    answer: 1,
+    explanation: "Formula: (Volume × Drop Factor) ÷ Time in minutes = (125 mL × 10 gtt/mL) ÷ 60 min = 1250 ÷ 60 ≈ 20.8 gtt/min."
+  },
+  {
+    q: "A patient needs 0.4 mg/kg of a drug. The patient weighs 60 kg. How many mg total?",
+    tag: "Math", tagClass: "tag-math",
+    options: ["12 mg", "18 mg", "24 mg", "30 mg"],
+    answer: 2,
+    explanation: "Weight-based dosing: 0.4 mg/kg × 60 kg = 24 mg. The kg units cancel, leaving mg as the answer."
+  },
+  {
+    q: "What is 3/8 expressed as a percentage?",
+    tag: "Math", tagClass: "tag-math",
+    options: ["30%", "33.3%", "37.5%", "40%"],
+    answer: 2,
+    explanation: "3 ÷ 8 = 0.375. Multiply by 100 = 37.5%. To convert any fraction to a percent: divide numerator ÷ denominator × 100."
+  }
+];
+
+// ── QUIZ STATE ──
+let answered = new Array(questions.length).fill(false);
+let correct = new Array(questions.length).fill(false);
+let submitted = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const letters = ['A','B','C','D'];
+    const optionsHTML = q.options.map((opt, j) => `
+      <button class="option-btn" id="opt-${i}-${j}" onclick="selectAnswer(${i}, ${j})" disabled="${submitted}">
+        <span class="opt-letter">${letters[j]}</span>
+        ${opt}
+      </button>
+    `).join('');
+
+    container.innerHTML += `
+      <div class="question-card" id="qcard-${i}">
+        <div class="q-meta">
+          <span class="q-num">Question ${i+1} of ${questions.length}</span>
+          <span class="q-tag ${q.tagClass}">${q.tag}</span>
+        </div>
+        <div class="q-text">${q.q}</div>
+        <div class="options" id="options-${i}">${optionsHTML}</div>
+        <div class="feedback" id="feedback-${i}"></div>
+      </div>
+    `;
+  });
+  updateProgress();
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (answered[qIdx] || submitted) return;
+  answered[qIdx] = true;
+  correct[qIdx] = (optIdx === questions[qIdx].answer);
+
+  const card = document.getElementById(`qcard-${qIdx}`);
+  const feedback = document.getElementById(`feedback-${qIdx}`);
+  const buttons = document.querySelectorAll(`#options-${qIdx} .option-btn`);
+
+  // Disable all options
+  buttons.forEach(btn => btn.disabled = true);
+
+  // Highlight selected
+  const selectedBtn = document.getElementById(`opt-${qIdx}-${optIdx}`);
+  selectedBtn.classList.add(correct[qIdx] ? 'correct-ans' : 'wrong-ans');
+  selectedBtn.classList.add('selected');
+
+  // Always show correct answer
+  const correctBtn = document.getElementById(`opt-${qIdx}-${questions[qIdx].answer}`);
+  correctBtn.classList.add('correct-ans');
+
+  // Feedback
+  feedback.className = `feedback visible ${correct[qIdx] ? 'correct' : 'incorrect'}`;
+  feedback.innerHTML = `<strong>${correct[qIdx] ? '✓ Correct!' : '✗ Incorrect'}</strong>${questions[qIdx].explanation}`;
+
+  card.classList.add(correct[qIdx] ? 'correct' : 'incorrect');
+  card.classList.add('answered');
+
+  updateProgress();
+  checkSubmitReady();
+}
+
+function updateProgress() {
+  const answeredCount = answered.filter(Boolean).length;
+  const correctCount = correct.filter(Boolean).length;
+  const pct = Math.round((answeredCount / questions.length) * 100);
+
+  document.getElementById('statAnswered').textContent = answeredCount;
+  document.getElementById('statCorrect').textContent = correctCount;
+  document.getElementById('progressLabel').textContent = `${answeredCount} of ${questions.length} answered`;
+  document.getElementById('progressPct').textContent = `${pct}%`;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function checkSubmitReady() {
+  const allAnswered = answered.every(Boolean);
+  document.getElementById('submitBtn').disabled = !allAnswered;
+}
+
+function submitQuiz() {
+  submitted = true;
+  document.getElementById('submitBtn').disabled = true;
+
+  const totalCorrect = correct.filter(Boolean).length;
+  const total = questions.length;
+  const pct = Math.round((totalCorrect / total) * 100);
+
+  // Category breakdown
+  const cats = {};
+  questions.forEach((q, i) => {
+    if (!cats[q.tag]) cats[q.tag] = { correct: 0, total: 0 };
+    cats[q.tag].total++;
+    if (correct[i]) cats[q.tag].correct++;
+  });
+
+  let grade, msg, color;
+  if (pct >= 90) { grade = 'Outstanding! 🌟'; msg = 'You\'ve mastered this material — excellent improvement from your diagnostic score!'; color = '#2d7a4f'; }
+  else if (pct >= 80) { grade = 'Great Work! ✓'; msg = 'Strong performance across all topics. You\'ve made real progress since your diagnostic.'; color = '#2d7a4f'; }
+  else if (pct >= 70) { grade = 'Good Effort!'; msg = 'Solid understanding overall. Review any incorrect answers and focus on weaker topics before your exam.'; color = '#b86a00'; }
+  else if (pct >= 60) { grade = 'Keep Studying'; msg = 'You\'ve built a foundation, but some topics need more review. Go back through the Study Notes for missed questions.'; color = '#b83232'; }
+  else { grade = 'More Practice Needed'; msg = 'Don\'t be discouraged — you\'ve completed the full 7-day program. Review the study notes thoroughly and consider another pass through.'; color = '#b83232'; }
+
+  const ring = document.getElementById('scoreRing');
+  ring.style.background = `conic-gradient(${color} ${pct * 3.6}deg, #eee 0deg)`;
+  ring.style.boxShadow = `0 0 0 6px white, 0 0 0 8px ${color}22`;
+
+  document.getElementById('scoreFraction').textContent = `${totalCorrect}/${total}`;
+  document.getElementById('scoreFraction').style.color = color;
+  document.getElementById('scorePercent').textContent = `${pct}%`;
+  document.getElementById('resultGrade').textContent = grade;
+  document.getElementById('resultGrade').style.color = color;
+  document.getElementById('resultMsg').textContent = msg;
+
+  const breakdown = document.getElementById('resultBreakdown');
+  breakdown.innerHTML = Object.entries(cats).map(([cat, data]) => `
+    <div class="rb-item">
+      <div class="rb-val" style="color:${data.correct/data.total>=0.8?'#2d7a4f':data.correct/data.total>=0.6?'#b86a00':'#b83232'}">${data.correct}/${data.total}</div>
+      <div class="rb-lbl">${cat}</div>
+    </div>
+  `).join('');
+
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  answered = new Array(questions.length).fill(false);
+  correct = new Array(questions.length).fill(false);
+  submitted = false;
+  document.getElementById('results-panel').classList.remove('visible');
+  document.getElementById('submitBtn').disabled = true;
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initialize
+buildQuiz();
+</script>
+</body>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:flex-start;">
+  <a href="lauren-hesi-day6.html" style="padding:10px 20px;border-radius:8px;border:2px solid #dde2f0;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#1a2744;text-decoration:none;">← Day 6</a>
+</div>
+</html>

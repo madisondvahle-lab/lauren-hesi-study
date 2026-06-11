@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lauren's HESI Study Plan — Day 6: Math Skills</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1a2744;
+    --navy-deep:   #111b35;
+    --navy-mid:    #243259;
+    --gold:        #c8a84b;
+    --gold-light:  #e8c96a;
+    --cream:       #f7f5f0;
+    --white:       #ffffff;
+    --slate:       #4a5568;
+    --slate-light: #718096;
+    --border:      #d6d3cc;
+    --correct:     #2d7a4f;
+    --correct-bg:  #edf7f2;
+    --wrong:       #b83232;
+    --wrong-bg:    #fdf0f0;
+    --highlight:   #fff8e1;
+    --mono:        'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 36px 24px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .header-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.75);
+  }
+  .meta-chip svg { flex-shrink: 0; opacity: 0.8; }
+
+  .score-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 12px;
+    padding: 18px 22px;
+    text-align: center;
+    min-width: 110px;
+  }
+  .score-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 4px; }
+  .score-num {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+  }
+  .score-sub { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  /* ── PROGRESS DOTS ── */
+  .progress-bar {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); white-space: nowrap; }
+  .dots { display: flex; gap: 8px; }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+  .dot.done   { background: var(--gold); border-color: var(--gold); }
+  .dot.active { background: var(--gold-light); border-color: var(--gold-light); box-shadow: 0 0 0 3px rgba(200,168,75,0.25); }
+  .dot.future { background: transparent; }
+
+  /* ── GOAL BANNER ── */
+  .goal-banner {
+    max-width: 820px;
+    margin: 28px auto 0;
+    padding: 0 24px;
+  }
+  .goal-inner {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--white);
+  }
+  .goal-icon { font-size: 22px; flex-shrink: 0; }
+  .goal-text strong { font-size: 13px; font-weight: 700; color: var(--gold-light); display: block; margin-bottom: 2px; }
+  .goal-text span { font-size: 13px; color: rgba(255,255,255,0.75); font-style: italic; }
+
+  /* ── TOPICS ROW ── */
+  .topics-row {
+    max-width: 820px;
+    margin: 18px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+  }
+  .topic-pill {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .topic-pill .t-icon { font-size: 16px; line-height: 1; }
+  .topic-pill .t-name { line-height: 1.3; }
+  .topic-pill .t-sub { font-weight: 400; color: var(--slate-light); font-size: 11px; display: block; margin-top: 1px; }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    max-width: 820px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+  }
+  .tab-nav {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    gap: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .tab-btn:hover:not(.active) { color: var(--navy); }
+
+  .tab-panel { display: none; padding: 28px 0 60px; }
+  .tab-panel.active { display: block; }
+
+  /* ── STUDY NOTES ── */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 2px 7px;
+    letter-spacing: 0.05em;
+  }
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .formula-box {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .formula-eq {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--gold-light);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .formula-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+  .formula-sep { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; flex-shrink: 0; }
+
+  .example-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .example-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .example-q { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; line-height: 1.5; }
+  .example-steps { list-style: none; }
+  .example-steps li {
+    font-size: 13px;
+    color: var(--slate);
+    padding: 3px 0 3px 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .example-steps li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .example-answer {
+    margin-top: 8px;
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
+
+  .tip-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .tip-card {
+    background: var(--highlight);
+    border: 1.5px solid #ffe082;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+  .tip-card strong { font-weight: 700; display: block; margin-bottom: 4px; font-size: 12px; color: #7a5f00; }
+
+  .conversion-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 10px;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .conversion-table th {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .conversion-table td {
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--slate);
+  }
+  .conversion-table tr:last-child td { border-bottom: none; }
+  .conversion-table tr:nth-child(even) td { background: #fafaf8; }
+  .conversion-table td:first-child { font-family: var(--mono); font-weight: 600; color: var(--navy); }
+
+  .dosage-steps {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    counter-reset: step;
+  }
+  .dosage-step {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .dosage-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-circle {
+    width: 26px; height: 26px;
+    background: var(--navy);
+    color: var(--gold-light);
+    border-radius: 50%;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body strong { font-size: 13px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 3px; }
+  .step-body span { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+  /* ── QUIZ ── */
+  .quiz-intro {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 18px 22px;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-intro-left strong { font-size: 15px; font-weight: 700; display: block; margin-bottom: 4px; color: var(--gold-light); }
+  .quiz-intro-left span { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .quiz-progress-wrap { text-align: right; }
+  .quiz-progress-wrap span { font-size: 12px; color: rgba(255,255,255,0.55); display: block; margin-bottom: 6px; }
+  .quiz-progress-track {
+    width: 160px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .q-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+  }
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--navy);
+    border-radius: 5px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .q-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: #fef9ec;
+    border: 1px solid #ffe082;
+    border-radius: 4px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .q-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .options { display: grid; gap: 8px; }
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 11px 16px;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .option-btn:hover:not(:disabled) { background: #eef2ff; border-color: #a0aec0; }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.correct  { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 600; }
+  .option-btn.wrong    { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+  .option-letter {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .option-btn.correct .option-letter { background: var(--correct); border-color: var(--correct); color: var(--white); }
+  .option-btn.wrong   .option-letter { background: var(--wrong); border-color: var(--wrong); color: var(--white); }
+
+  .explanation {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #f0f4ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #2d3a8c;
+    line-height: 1.6;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { font-weight: 700; }
+
+  /* RESULTS */
+  .results-panel {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .results-panel.show { display: block; }
+  .results-score-big {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .results-score-big span { color: var(--gold); }
+  .results-label { font-size: 14px; color: var(--slate-light); margin-bottom: 28px; }
+  .results-msg {
+    max-width: 420px;
+    margin: 0 auto 28px;
+    font-size: 15px;
+    color: var(--navy);
+    line-height: 1.6;
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+  }
+  .retry-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .retry-btn:hover { background: var(--navy-mid); }
+
+  /* SUBMIT */
+  .quiz-submit-row {
+    text-align: center;
+    padding: 8px 0 24px;
+  }
+  .submit-btn {
+    background: var(--gold);
+    color: var(--navy-deep);
+    border: none;
+    padding: 13px 36px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+  @media (max-width: 600px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .score-badge { display: none; }
+    .formula-box { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .formula-sep { display: none; }
+    .quiz-intro { flex-direction: column; }
+    .quiz-progress-wrap { text-align: left; }
+    .quiz-progress-track { width: 100%; }
+    .tab-btn { padding: 10px 16px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <p class="header-eyebrow">HESI A² Prep · 7-Day Study Plan</p>
+      <h1 class="header-name">Lauren's Study Plan</h1>
+      <p class="header-subtitle">Day 6 of 7 — Math Skills</p>
+      <div class="header-meta">
+        <span class="meta-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          60–90 min
+        </span>
+        <span class="meta-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          20 Practice Questions
+        </span>
+        <span class="meta-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          4 Topics
+        </span>
+      </div>
+    </div>
+    <div class="score-badge">
+      <div class="score-label">Diagnostic</div>
+      <div class="score-num">33<span style="font-size:16px;opacity:.6">/50</span></div>
+      <div class="score-sub">starting score</div>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <span class="progress-label">Progress</span>
+    <div class="dots">
+      <div class="dot done" title="Day 1 complete"></div>
+      <div class="dot done" title="Day 2 complete"></div>
+      <div class="dot done" title="Day 3 complete"></div>
+      <div class="dot done" title="Day 4 complete"></div>
+      <div class="dot done" title="Day 5 complete"></div>
+      <div class="dot active" title="Day 6 — today"></div>
+      <div class="dot future" title="Day 7"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ GOAL BANNER ══ -->
+<div class="goal-banner">
+  <div class="goal-inner">
+    <div class="goal-icon">🎯</div>
+    <div class="goal-text">
+      <strong>Today's Goal</strong>
+      <span>Strengthen your confidence with numbers — percentages, ratios, conversions, and medication math.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIC CHIPS ══ -->
+<div class="topics-row">
+  <div class="topic-pill"><span class="t-icon">%</span><span class="t-name">Percentages<span class="t-sub">part ÷ whole × 100</span></span></div>
+  <div class="topic-pill"><span class="t-icon">÷</span><span class="t-name">Ratio Simplification<span class="t-sub">using GCF</span></span></div>
+  <div class="topic-pill"><span class="t-icon">📏</span><span class="t-name">Unit Conversions<span class="t-sub">basic metric</span></span></div>
+  <div class="topic-pill"><span class="t-icon">💊</span><span class="t-name">Medication Math<span class="t-sub">dosage calculations</span></span></div>
+</div>
+
+<!-- ══ TABS ══ -->
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('notes', this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Study Notes
+    </button>
+    <button class="tab-btn" onclick="switchTab('quiz', this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Practice Quiz
+    </button>
+  </div>
+
+  <!-- ══ NOTES PANEL ══ -->
+  <div id="tab-notes" class="tab-panel active">
+
+    <!-- 1. PERCENTAGES -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">Percentage Calculations</span>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-eq">% = (Part ÷ Whole) × 100</div>
+        <div class="formula-sep"></div>
+        <div class="formula-desc">Move between the three forms:<br><strong style="color:#fff">Part = (% ÷ 100) × Whole &nbsp;|&nbsp; Whole = Part ÷ (% ÷ 100)</strong></div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-label">Example A — Find the Percent</div>
+        <div class="example-q">18 out of 24 students passed. What percentage passed?</div>
+        <ul class="example-steps">
+          <li>Part = 18, Whole = 24</li>
+          <li>18 ÷ 24 = 0.75</li>
+          <li>0.75 × 100 = 75%</li>
+        </ul>
+        <span class="example-answer">Answer: 75%</span>
+      </div>
+
+      <div class="example-card">
+        <div class="example-label">Example B — Find the Part</div>
+        <div class="example-q">What is 40% of 85?</div>
+        <ul class="example-steps">
+          <li>40 ÷ 100 = 0.40</li>
+          <li>0.40 × 85 = 34</li>
+        </ul>
+        <span class="example-answer">Answer: 34</span>
+      </div>
+
+      <div class="example-card">
+        <div class="example-label">Example C — Find the Whole</div>
+        <div class="example-q">15 is 25% of what number?</div>
+        <ul class="example-steps">
+          <li>Whole = Part ÷ (% ÷ 100)</li>
+          <li>Whole = 15 ÷ 0.25 = 60</li>
+        </ul>
+        <span class="example-answer">Answer: 60</span>
+      </div>
+
+      <div class="tip-row">
+        <div class="tip-card"><strong>💡 Quick Trick</strong>"Percent of" means multiply. "Out of" means divide top by bottom.</div>
+        <div class="tip-card"><strong>💡 Decimal Bridge</strong>Divide % by 100 to get a decimal first, then multiply. Always.</div>
+      </div>
+    </div>
+
+    <!-- 2. RATIOS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">Ratio Simplification Using GCF</span>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-eq">a : b → (a÷GCF) : (b÷GCF)</div>
+        <div class="formula-sep"></div>
+        <div class="formula-desc">GCF = Greatest Common Factor<br><strong style="color:#fff">List factors of both → find the largest one both share</strong></div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-label">Example — Simplify 36 : 48</div>
+        <div class="example-q">Express the ratio 36 : 48 in simplest form.</div>
+        <ul class="example-steps">
+          <li>Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36</li>
+          <li>Factors of 48: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48</li>
+          <li>GCF = 12</li>
+          <li>36 ÷ 12 = 3 &nbsp;&nbsp; 48 ÷ 12 = 4</li>
+        </ul>
+        <span class="example-answer">Answer: 3 : 4</span>
+      </div>
+
+      <div class="tip-row">
+        <div class="tip-card"><strong>💡 Fast GCF Shortcut</strong>Try 2, then 3, then 5. Keep dividing both by the same number until nothing divides evenly.</div>
+        <div class="tip-card"><strong>💡 Cross-Check</strong>Multiply back: 3 × 12 = 36 ✓, 4 × 12 = 48 ✓. Verify before moving on.</div>
+        <div class="tip-card"><strong>💡 Clinic Context</strong>Ratios appear in IV drip rates, concentration labels, and staffing ratios on the HESI.</div>
+      </div>
+    </div>
+
+    <!-- 3. UNIT CONVERSIONS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Unit Conversions — Basic Metric</span>
+      </div>
+
+      <table class="conversion-table">
+        <thead>
+          <tr><th>Conversion</th><th>Relationship</th><th>Memory Hook</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>kg → g</td><td>× 1,000 &nbsp; (÷ 1,000 to reverse)</td><td>Kilo = 1,000 units</td></tr>
+          <tr><td>g → mg</td><td>× 1,000 &nbsp; (÷ 1,000 to reverse)</td><td>milli = 1/1,000</td></tr>
+          <tr><td>mg → mcg</td><td>× 1,000 &nbsp; (÷ 1,000 to reverse)</td><td>micro = 1/1,000,000</td></tr>
+          <tr><td>L → mL</td><td>× 1,000 &nbsp; (÷ 1,000 to reverse)</td><td>1 liter = 1,000 mL</td></tr>
+          <tr><td>cm → mm</td><td>× 10 &nbsp; (÷ 10 to reverse)</td><td>centi = 1/100</td></tr>
+        </tbody>
+      </table>
+
+      <div class="example-card" style="margin-top:14px">
+        <div class="example-label">Example — Convert 2.5 kg to grams</div>
+        <div class="example-q">A patient weighs 2.5 kg. How many grams is that?</div>
+        <ul class="example-steps">
+          <li>kg → g means × 1,000</li>
+          <li>2.5 × 1,000 = 2,500</li>
+        </ul>
+        <span class="example-answer">Answer: 2,500 g</span>
+      </div>
+
+      <div class="tip-row">
+        <div class="tip-card"><strong>💡 Going Down</strong>Smaller unit = bigger number. Multiply by 1,000 each step you go down (kg → g → mg → mcg).</div>
+        <div class="tip-card"><strong>💡 Going Up</strong>Larger unit = smaller number. Divide by 1,000 each step you go up (mcg → mg → g → kg).</div>
+      </div>
+    </div>
+
+    <!-- 4. MEDICATION MATH -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-title">Medication Math — Dosage Calculations</span>
+      </div>
+
+      <div class="formula-box">
+        <div style="width:100%">
+          <div class="formula-eq" style="margin-bottom:10px">Volume (mL) = Desired dose (mg) ÷ Concentration (mg/mL)</div>
+          <div class="formula-desc">Also written as: <span style="color:var(--gold-light); font-family:var(--mono)">D/H × V</span> &nbsp;— Desired over Have, times Vehicle (volume on hand)</div>
+        </div>
+      </div>
+
+      <div class="dosage-steps">
+        <div class="dosage-step">
+          <div class="step-circle">1</div>
+          <div class="step-body">
+            <strong>Identify what you have (H/V)</strong>
+            <span>Read the label: e.g., "500 mg / 2 mL" → concentration is 250 mg/mL, vehicle is 2 mL.</span>
+          </div>
+        </div>
+        <div class="dosage-step">
+          <div class="step-circle">2</div>
+          <div class="step-body">
+            <strong>Identify the desired dose (D)</strong>
+            <span>The order says: "Give 750 mg" → Desired = 750 mg.</span>
+          </div>
+        </div>
+        <div class="dosage-step">
+          <div class="step-circle">3</div>
+          <div class="step-body">
+            <strong>Match units — convert if needed</strong>
+            <span>If the order is in mg but you have mcg/mL, convert first before calculating.</span>
+          </div>
+        </div>
+        <div class="dosage-step">
+          <div class="step-circle">4</div>
+          <div class="step-body">
+            <strong>Apply the formula</strong>
+            <span>mL = (D ÷ H) × V &nbsp;→ (750 ÷ 500) × 2 = 1.5 × 2 = <strong>3 mL</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card" style="margin-top:14px">
+        <div class="example-label">Classic HESI Example</div>
+        <div class="example-q">Order: Give 250 mg. On hand: amoxicillin 125 mg/5 mL. How many mL do you give?</div>
+        <ul class="example-steps">
+          <li>Desired (D) = 250 mg, Have (H) = 125 mg, Vehicle (V) = 5 mL</li>
+          <li>mL = (250 ÷ 125) × 5 = 2 × 5 = 10 mL</li>
+        </ul>
+        <span class="example-answer">Answer: 10 mL</span>
+      </div>
+
+      <div class="tip-row">
+        <div class="tip-card"><strong>💡 Sanity Check</strong>If D > H, you'll give more than the vehicle volume. If D < H, you'll give less. Verify your answer makes this sense.</div>
+        <div class="tip-card"><strong>💡 Label Units</strong>Write units with every number. Crossing them out when they cancel confirms your setup is correct.</div>
+      </div>
+    </div>
+
+  </div><!-- /notes panel -->
+
+  <!-- ══ QUIZ PANEL ══ -->
+  <div id="tab-quiz" class="tab-panel">
+
+    <div class="quiz-intro">
+      <div class="quiz-intro-left">
+        <strong>20-Question Math Practice Quiz</strong>
+        <span>Select one answer per question — explanation reveals after each choice.</span>
+      </div>
+      <div class="quiz-progress-wrap">
+        <span id="quiz-count">0 / 20 answered</span>
+        <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quiz-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div id="quiz-questions">
+      <!-- Questions injected by JS -->
+    </div>
+
+    <div class="quiz-submit-row">
+      <button class="submit-btn" id="submit-btn" onclick="submitQuiz()" disabled>Submit Quiz</button>
+    </div>
+
+    <div class="results-panel" id="results-panel">
+      <div class="results-score-big" id="results-score"></div>
+      <p class="results-label">questions correct</p>
+      <p class="results-msg" id="results-msg"></p>
+      <button class="retry-btn" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+
+  </div><!-- /quiz panel -->
+
+</div><!-- /tabs-wrap -->
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+const questions = [
+  // PERCENTAGES (1–5)
+  {
+    num: 1, tag: "Percentages",
+    text: "What is 35% of 200?",
+    options: ["55", "60", "70", "75"],
+    answer: 2,
+    explanation: "<strong>35% of 200:</strong> Convert % to decimal → 35 ÷ 100 = 0.35. Then 0.35 × 200 = <strong>70</strong>."
+  },
+  {
+    num: 2, tag: "Percentages",
+    text: "A nurse correctly administered 45 out of 60 medications. What percentage is that?",
+    options: ["65%", "70%", "75%", "80%"],
+    answer: 2,
+    explanation: "<strong>45 ÷ 60 = 0.75 → × 100 = 75%.</strong> Part ÷ Whole × 100."
+  },
+  {
+    num: 3, tag: "Percentages",
+    text: "12 is 15% of what number?",
+    options: ["72", "75", "80", "84"],
+    answer: 2,
+    explanation: "<strong>Whole = Part ÷ (% ÷ 100) = 12 ÷ 0.15 = 80.</strong>"
+  },
+  {
+    num: 4, tag: "Percentages",
+    text: "A patient drank 480 mL out of a 600 mL pitcher. What percentage did they drink?",
+    options: ["75%", "80%", "85%", "90%"],
+    answer: 1,
+    explanation: "<strong>480 ÷ 600 = 0.80 → 80%.</strong>"
+  },
+  {
+    num: 5, tag: "Percentages",
+    text: "What is 8% of 250?",
+    options: ["18", "20", "22", "25"],
+    answer: 1,
+    explanation: "<strong>0.08 × 250 = 20.</strong>"
+  },
+  // RATIOS (6–10)
+  {
+    num: 6, tag: "Ratios",
+    text: "Simplify the ratio 24 : 36.",
+    options: ["2 : 3", "3 : 4", "4 : 6", "6 : 9"],
+    answer: 0,
+    explanation: "<strong>GCF of 24 and 36 is 12.</strong> 24 ÷ 12 = 2, 36 ÷ 12 = 3 → <strong>2 : 3</strong>."
+  },
+  {
+    num: 7, tag: "Ratios",
+    text: "What is the simplified form of 45 : 60?",
+    options: ["9 : 12", "3 : 4", "5 : 7", "15 : 20"],
+    answer: 1,
+    explanation: "<strong>GCF of 45 and 60 is 15.</strong> 45 ÷ 15 = 3, 60 ÷ 15 = 4 → <strong>3 : 4</strong>."
+  },
+  {
+    num: 8, tag: "Ratios",
+    text: "A solution has 18 parts saline to 12 parts water. What is the ratio in simplest form?",
+    options: ["2 : 3", "3 : 2", "6 : 4", "9 : 6"],
+    answer: 1,
+    explanation: "<strong>GCF of 18 and 12 is 6.</strong> 18 ÷ 6 = 3, 12 ÷ 6 = 2 → saline : water = <strong>3 : 2</strong>."
+  },
+  {
+    num: 9, tag: "Ratios",
+    text: "Simplify 100 : 75.",
+    options: ["5 : 4", "4 : 3", "3 : 2", "20 : 15"],
+    answer: 1,
+    explanation: "<strong>GCF of 100 and 75 is 25.</strong> 100 ÷ 25 = 4, 75 ÷ 25 = 3 → <strong>4 : 3</strong>."
+  },
+  {
+    num: 10, tag: "Ratios",
+    text: "A class has 32 students and 8 instructors. What is the student-to-instructor ratio in simplest form?",
+    options: ["6 : 1", "4 : 1", "8 : 2", "16 : 4"],
+    answer: 1,
+    explanation: "<strong>GCF of 32 and 8 is 8.</strong> 32 ÷ 8 = 4, 8 ÷ 8 = 1 → <strong>4 : 1</strong>."
+  },
+  // UNIT CONVERSIONS (11–14)
+  {
+    num: 11, tag: "Conversions",
+    text: "How many milligrams are in 3.5 grams?",
+    options: ["350 mg", "3,500 mg", "35,000 mg", "0.035 mg"],
+    answer: 1,
+    explanation: "<strong>g → mg: multiply by 1,000.</strong> 3.5 × 1,000 = <strong>3,500 mg</strong>."
+  },
+  {
+    num: 12, tag: "Conversions",
+    text: "A patient needs 0.5 L of IV fluid. How many mL is that?",
+    options: ["5 mL", "50 mL", "500 mL", "5,000 mL"],
+    answer: 2,
+    explanation: "<strong>L → mL: multiply by 1,000.</strong> 0.5 × 1,000 = <strong>500 mL</strong>."
+  },
+  {
+    num: 13, tag: "Conversions",
+    text: "Convert 2,500 mg to grams.",
+    options: ["0.25 g", "2.5 g", "25 g", "250 g"],
+    answer: 1,
+    explanation: "<strong>mg → g: divide by 1,000.</strong> 2,500 ÷ 1,000 = <strong>2.5 g</strong>."
+  },
+  {
+    num: 14, tag: "Conversions",
+    text: "How many micrograms (mcg) are in 0.004 g?",
+    options: ["400 mcg", "4,000 mcg", "40,000 mcg", "400,000 mcg"],
+    answer: 1,
+    explanation: "<strong>g → mg: × 1,000 → 4 mg. mg → mcg: × 1,000 → 4,000 mcg.</strong>"
+  },
+  // MEDICATION MATH (15–20)
+  {
+    num: 15, tag: "Med Math",
+    text: "Order: Give 500 mg. On hand: 250 mg/5 mL. How many mL do you give?",
+    options: ["5 mL", "8 mL", "10 mL", "12 mL"],
+    answer: 2,
+    explanation: "<strong>mL = (D ÷ H) × V = (500 ÷ 250) × 5 = 2 × 5 = 10 mL.</strong>"
+  },
+  {
+    num: 16, tag: "Med Math",
+    text: "Order: Give 75 mg. On hand: 150 mg/10 mL. How many mL do you give?",
+    options: ["3 mL", "5 mL", "7.5 mL", "10 mL"],
+    answer: 1,
+    explanation: "<strong>(75 ÷ 150) × 10 = 0.5 × 10 = 5 mL.</strong>"
+  },
+  {
+    num: 17, tag: "Med Math",
+    text: "Order: ibuprofen 400 mg. On hand: 100 mg/5 mL. How many mL?",
+    options: ["10 mL", "15 mL", "20 mL", "25 mL"],
+    answer: 2,
+    explanation: "<strong>(400 ÷ 100) × 5 = 4 × 5 = 20 mL.</strong>"
+  },
+  {
+    num: 18, tag: "Med Math",
+    text: "Order: 0.5 g of amoxicillin. On hand: 250 mg/5 mL. How many mL do you give?",
+    options: ["5 mL", "8 mL", "10 mL", "12.5 mL"],
+    answer: 2,
+    explanation: "<strong>First convert: 0.5 g = 500 mg.</strong> Then (500 ÷ 250) × 5 = 2 × 5 = <strong>10 mL</strong>."
+  },
+  {
+    num: 19, tag: "Med Math",
+    text: "Order: 300 mg of medication. On hand: 120 mg/mL. How many mL?",
+    options: ["2 mL", "2.5 mL", "3 mL", "3.5 mL"],
+    answer: 1,
+    explanation: "<strong>(300 ÷ 120) × 1 = 2.5 mL.</strong> Vehicle (V) = 1 mL since the label is per mL."
+  },
+  {
+    num: 20, tag: "Med Math",
+    text: "Order: Give 1,000 mg. On hand: 500 mg/2 mL. How many mL?",
+    options: ["2 mL", "4 mL", "6 mL", "8 mL"],
+    answer: 1,
+    explanation: "<strong>(1,000 ÷ 500) × 2 = 2 × 2 = 4 mL.</strong> Double the desired → double the volume."
+  }
+];
+
+let answered = {};
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  answered = {};
+  updateProgress();
+
+  questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'q-' + qi;
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">Q${q.num}</span>
+        <span class="q-tag">${q.tag}</span>
+        <span class="q-text">${q.text}</span>
+      </div>
+      <div class="options">
+        ${q.options.map((opt, oi) => `
+          <button class="option-btn" onclick="selectAnswer(${qi}, ${oi})" id="opt-${qi}-${oi}">
+            <span class="option-letter">${['A','B','C','D'][oi]}</span>
+            ${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}">${q.explanation}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qi, oi) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = oi;
+
+  const q = questions[qi];
+  const opts = document.querySelectorAll(`#q-${qi} .option-btn`);
+  opts.forEach(b => b.disabled = true);
+
+  opts[oi].classList.add(oi === q.answer ? 'correct' : 'wrong');
+  if (oi !== q.answer) opts[q.answer].classList.add('correct');
+
+  document.getElementById(`exp-${qi}`).classList.add('show');
+  updateProgress();
+
+  const allAnswered = Object.keys(answered).length === questions.length;
+  document.getElementById('submit-btn').disabled = !allAnswered;
+}
+
+function updateProgress() {
+  const count = Object.keys(answered).length;
+  document.getElementById('quiz-count').textContent = `${count} / ${questions.length} answered`;
+  document.getElementById('quiz-fill').style.width = `${(count / questions.length) * 100}%`;
+}
+
+function submitQuiz() {
+  let score = 0;
+  questions.forEach((q, qi) => { if (answered[qi] === q.answer) score++; });
+
+  document.getElementById('quiz-questions').style.display = 'none';
+  document.querySelector('.quiz-submit-row').style.display = 'none';
+
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('show');
+  document.getElementById('results-score').innerHTML = `<span>${score}</span>/${questions.length}`;
+
+  const pct = Math.round((score / questions.length) * 100);
+  let msg = '';
+  if (pct >= 90) msg = "Outstanding work, Lauren. Your number sense is sharp and ready for exam day.";
+  else if (pct >= 75) msg = "Solid performance. Review any missed questions in the notes — you're close to mastery.";
+  else if (pct >= 60) msg = "Good effort. Revisit the formula box for dosage math and try the quiz again — repetition builds speed.";
+  else msg = "Keep going — every formula you practice makes the next attempt stronger. Review the notes and retry.";
+
+  document.getElementById('results-msg').textContent = msg;
+}
+
+function resetQuiz() {
+  document.getElementById('results-panel').classList.remove('show');
+  document.getElementById('quiz-questions').style.display = '';
+  document.querySelector('.quiz-submit-row').style.display = '';
+  document.getElementById('submit-btn').disabled = true;
+  buildQuiz();
+}
+
+buildQuiz();
+</script>
+</body>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:space-between;">
+  <a href="lauren-hesi-day5.html" style="padding:10px 20px;border-radius:8px;border:2px solid #dde2f0;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#1a2744;text-decoration:none;">← Day 5</a>
+  <a href="lauren-hesi-day7.html" style="padding:10px 20px;border-radius:8px;background:#1a2744;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:white;text-decoration:none;">Day 7 →</a>
+</div>
+</html>

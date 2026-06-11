@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lauren's HESI Study Plan — Day 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #0f2044;
+    --navy-mid:  #1a3360;
+    --navy-lt:   #2a4a80;
+    --gold:      #c9a84c;
+    --gold-lt:   #f0d98a;
+    --cream:     #f8f6f1;
+    --white:     #ffffff;
+    --gray-100:  #f1f3f7;
+    --gray-200:  #e2e6ee;
+    --gray-400:  #8b96ad;
+    --gray-700:  #3d4a62;
+    --green:     #1e7d5a;
+    --green-lt:  #d4f0e6;
+    --red:       #b83232;
+    --red-lt:    #fce8e8;
+    --teal:      #1a6e7e;
+    --teal-lt:   #d0eef3;
+    --text:      #1c2a42;
+    --radius:    10px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-lt) 100%);
+    color: var(--white);
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cpath d='M0 30h60M30 0v60'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .header-left { flex: 1; }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 8px;
+  }
+
+  header h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  header h1 span { color: var(--gold); }
+
+  .header-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.72);
+    margin-top: 6px;
+  }
+
+  .score-badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    text-align: center;
+    min-width: 130px;
+    backdrop-filter: blur(4px);
+  }
+  .score-badge .label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 6px;
+  }
+  .score-badge .score {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .score-badge .score-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* ── PROGRESS DOTS ── */
+  .progress-bar {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .progress-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+  }
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .dot {
+    width: 28px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.18);
+    transition: background 0.2s;
+  }
+  .dot.done  { background: var(--gold); }
+  .dot.today { background: var(--gold-lt); box-shadow: 0 0 0 2px rgba(240,217,138,0.45); }
+  .dot.upcoming { background: rgba(255,255,255,0.14); }
+  .dot-day-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+  }
+
+  /* ── META BAR ── */
+  .meta-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 14px 40px;
+  }
+  .meta-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+  .meta-chip svg { flex-shrink: 0; }
+  .meta-chip strong { color: var(--navy); }
+
+  /* ── GOAL BANNER ── */
+  .goal-banner {
+    max-width: 860px;
+    margin: 24px auto 0;
+    padding: 0 40px;
+  }
+  .goal-inner {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .goal-icon {
+    width: 40px; height: 40px;
+    background: rgba(201,168,76,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .goal-text { color: var(--white); }
+  .goal-text .eyebrow { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 3px; font-weight: 600; }
+  .goal-text p { font-size: 14px; color: rgba(255,255,255,0.88); line-height: 1.5; }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    max-width: 860px;
+    margin: 28px auto 0;
+    padding: 0 40px;
+  }
+  .tab-buttons {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--gray-200);
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-400);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .tab-btn:hover { color: var(--navy-mid); }
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab-panel { display: none; padding-top: 28px; padding-bottom: 48px; }
+  .tab-panel.active { display: block; }
+
+  /* ── NOTES: SECTION CARDS ── */
+  .section-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .section-head {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-blue   { background: #dce8fb; }
+  .icon-teal   { background: var(--teal-lt); }
+  .icon-gold   { background: #fdf3d8; }
+  .icon-green  { background: var(--green-lt); }
+
+  .section-head h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section-head .count {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-400);
+    background: var(--gray-100);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* vocab grid */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--gray-200);
+  }
+  .vocab-card {
+    background: var(--white);
+    padding: 18px 20px;
+    transition: background 0.12s;
+  }
+  .vocab-card:hover { background: var(--gray-100); }
+  .vocab-word {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+    font-family: 'Merriweather', serif;
+  }
+  .vocab-def {
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.55;
+  }
+  .vocab-example {
+    font-size: 12px;
+    color: var(--teal);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* prefix/suffix tables */
+  .affix-table { width: 100%; border-collapse: collapse; }
+  .affix-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    padding: 10px 20px;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .affix-table td {
+    padding: 13px 20px;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .affix-table tr:last-child td { border-bottom: none; }
+  .affix-table tr:hover td { background: var(--gray-100); }
+  .affix { font-weight: 700; color: var(--navy); font-size: 15px; font-family: 'Merriweather', serif; }
+  .meaning { color: var(--gray-700); }
+  .examples-cell { color: var(--teal); font-style: italic; font-size: 12.5px; }
+
+  /* tip box */
+  .tip-box {
+    margin: 0 20px 20px;
+    background: #fffbee;
+    border: 1px solid #f0d98a;
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #6b5500;
+    line-height: 1.6;
+  }
+  .tip-box strong { color: #4a3a00; }
+
+  /* ── QUIZ ── */
+  .quiz-header {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-header h2 { font-family: 'Merriweather', serif; font-size: 17px; color: var(--navy); }
+  .quiz-meta { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
+
+  .quiz-progress-wrap { display: flex; align-items: center; gap: 12px; }
+  .quiz-progress-bar-outer {
+    width: 160px; height: 8px;
+    background: var(--gray-200); border-radius: 4px; overflow: hidden;
+  }
+  .quiz-progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--navy), var(--navy-lt));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .quiz-progress-text { font-size: 12px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+
+  .q-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .q-card:hover { box-shadow: 0 2px 12px rgba(15,32,68,0.07); }
+
+  .q-top {
+    padding: 18px 22px 14px;
+  }
+  .q-num {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+
+  .q-options { padding: 0 22px 18px; display: grid; gap: 8px; }
+  .q-opt {
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 11px 16px;
+    font-size: 13.5px;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.12s;
+    background: var(--white);
+    text-align: left;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .q-opt:hover:not(.disabled) {
+    border-color: var(--navy-lt);
+    background: var(--gray-100);
+    color: var(--navy);
+  }
+  .q-opt .opt-letter {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gray-700);
+    transition: all 0.12s;
+  }
+  .q-opt:hover:not(.disabled) .opt-letter {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .q-opt.correct {
+    border-color: var(--green);
+    background: var(--green-lt);
+    color: var(--green);
+  }
+  .q-opt.correct .opt-letter { background: var(--green); color: var(--white); }
+  .q-opt.wrong {
+    border-color: var(--red);
+    background: var(--red-lt);
+    color: var(--red);
+  }
+  .q-opt.wrong .opt-letter { background: var(--red); color: var(--white); }
+  .q-opt.disabled { cursor: not-allowed; }
+
+  .q-feedback {
+    margin: 0 22px 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    display: none;
+  }
+  .q-feedback.show { display: block; }
+  .q-feedback.correct { background: var(--green-lt); color: var(--green); border: 1px solid #a3dac9; }
+  .q-feedback.wrong { background: var(--red-lt); color: var(--red); border: 1px solid #f5baba; }
+
+  /* results */
+  .results-panel {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .results-panel.show { display: block; }
+  .results-score-big {
+    font-family: 'Merriweather', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .results-score-big span { color: var(--gold); }
+  .results-label { font-size: 14px; color: var(--gray-400); margin-top: 8px; margin-bottom: 24px; }
+  .results-msg { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .results-sub { font-size: 14px; color: var(--gray-700); max-width: 400px; margin: 0 auto 28px; line-height: 1.6; }
+  .btn-retake {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-retake:hover { background: var(--navy-lt); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header { padding: 28px 20px 22px; }
+    .progress-bar, .goal-banner, .tabs-wrap { padding-left: 20px; padding-right: 20px; }
+    .meta-bar { padding: 12px 20px; }
+    header h1 { font-size: 22px; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .quiz-progress-bar-outer { width: 100px; }
+    .tab-btn { padding: 11px 16px; font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-eyebrow">HESI A² Prep · Study Plan</div>
+      <h1>Lauren's <span>Day 5</span></h1>
+      <div class="header-subtitle">Medical Terminology &amp; Vocabulary</div>
+    </div>
+    <div class="score-badge">
+      <div class="label">Diagnostic</div>
+      <div class="score">33<span style="font-size:20px;color:rgba(201,168,76,0.7)">/50</span></div>
+      <div class="score-sub">Baseline Score</div>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <span class="progress-label">Week</span>
+    <div class="dots">
+      <div class="dot done" title="Day 1 ✓"></div>
+      <div class="dot done" title="Day 2 ✓"></div>
+      <div class="dot done" title="Day 3 ✓"></div>
+      <div class="dot done" title="Day 4 ✓"></div>
+      <div class="dot today" title="Day 5 — Today"></div>
+      <div class="dot upcoming" title="Day 6"></div>
+      <div class="dot upcoming" title="Day 7"></div>
+    </div>
+    <span class="dot-day-label">Day 5 of 7</span>
+  </div>
+</header>
+
+<!-- ═══ META BAR ═══ -->
+<div class="meta-bar">
+  <div class="meta-inner">
+    <div class="meta-chip">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span><strong>60–90 min</strong> study time</span>
+    </div>
+    <div class="meta-chip">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <span><strong>25 questions</strong> practice quiz</span>
+    </div>
+    <div class="meta-chip">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      <span>3 topics covered</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GOAL BANNER ═══ -->
+<div class="goal-banner">
+  <div class="goal-inner">
+    <div class="goal-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="goal-text">
+      <div class="eyebrow">Today's Goal</div>
+      <p>Build your word power and learn high-frequency HESI terms — master the building blocks that decode almost any medical word on test day.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-wrap">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('notes', this)">📖 Study Notes</button>
+    <button class="tab-btn" onclick="switchTab('quiz', this)">✏️ Practice Quiz</button>
+  </div>
+
+  <!-- ══ NOTES PANEL ══ -->
+  <div id="tab-notes" class="tab-panel active">
+
+    <!-- KEY VOCAB WORDS -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon icon-blue">🔑</div>
+        <h2>Key Vocabulary Words</h2>
+        <span class="count">10 terms</span>
+      </div>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-word">Benign</div>
+          <div class="vocab-def">Not cancerous; not harmful or progressive. Used to describe tumors that do not invade surrounding tissue.</div>
+          <div class="vocab-example">e.g., "The biopsy confirmed the mass was benign."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Malignant</div>
+          <div class="vocab-def">Cancerous; tending to spread, invade, and destroy surrounding tissue. Opposite of benign.</div>
+          <div class="vocab-example">e.g., "The pathology report indicated a malignant tumor."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Prognosis</div>
+          <div class="vocab-def">A forecast of the probable course and outcome of a disease or condition.</div>
+          <div class="vocab-example">e.g., "The patient's prognosis is favorable with treatment."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Adverse</div>
+          <div class="vocab-def">Harmful or unfavorable. Often used with "effect" to describe unexpected negative reactions to a drug.</div>
+          <div class="vocab-example">e.g., "Nausea is an adverse effect of the medication."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Chronic</div>
+          <div class="vocab-def">Persisting for a long time (3+ months), often progressing slowly. Contrast with acute.</div>
+          <div class="vocab-example">e.g., "She has chronic lower back pain."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Acute</div>
+          <div class="vocab-def">Sudden onset, severe in nature, and short in duration. Requires prompt medical attention.</div>
+          <div class="vocab-example">e.g., "He was admitted with acute appendicitis."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Anterior</div>
+          <div class="vocab-def">Situated at or toward the front of the body. Also called "ventral" in anatomy.</div>
+          <div class="vocab-example">e.g., "The anterior cruciate ligament (ACL) is at the front of the knee."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Posterior</div>
+          <div class="vocab-def">Situated at or toward the back of the body. Opposite of anterior.</div>
+          <div class="vocab-example">e.g., "The posterior tibial artery runs along the back of the lower leg."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Diagnosis</div>
+          <div class="vocab-def">The process of identifying a disease or condition by examining symptoms, test results, and history.</div>
+          <div class="vocab-example">e.g., "The diagnosis of diabetes was confirmed by a blood test."</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-word">Symptom</div>
+          <div class="vocab-def">A subjective sign of disease felt by the patient (pain, fatigue) but not directly measurable by others.</div>
+          <div class="vocab-example">e.g., "Headache and dizziness were her primary symptoms."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 Memory Tip:</strong> Pair opposites! <strong>Benign vs. Malignant</strong>, <strong>Acute vs. Chronic</strong>, <strong>Anterior vs. Posterior</strong>. Learning them as contrast pairs is proven to double retention.
+    </div>
+
+    <!-- PREFIXES -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon icon-teal">⬅️</div>
+        <h2>Common Medical Prefixes</h2>
+        <span class="count">6 prefixes</span>
+      </div>
+      <table class="affix-table">
+        <thead>
+          <tr>
+            <th style="width:100px">Prefix</th>
+            <th>Meaning</th>
+            <th>HESI Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="affix">brady-</span></td>
+            <td class="meaning">Slow</td>
+            <td class="examples-cell">bradycardia (slow heart rate), bradypnea (slow breathing)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">tachy-</span></td>
+            <td class="meaning">Fast, rapid</td>
+            <td class="examples-cell">tachycardia (fast heart rate), tachypnea (rapid breathing)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">hypo-</span></td>
+            <td class="meaning">Below normal, deficient</td>
+            <td class="examples-cell">hypoglycemia (low blood sugar), hypotension (low blood pressure)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">hyper-</span></td>
+            <td class="meaning">Above normal, excessive</td>
+            <td class="examples-cell">hypertension (high blood pressure), hyperglycemia (high blood sugar)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">anti-</span></td>
+            <td class="meaning">Against, opposing</td>
+            <td class="examples-cell">antibiotic (against bacteria), anticoagulant (against clotting)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">sub-</span></td>
+            <td class="meaning">Under, below</td>
+            <td class="examples-cell">subcutaneous (under the skin), sublingual (under the tongue)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 Pattern Trick:</strong> <strong>brady/tachy</strong> and <strong>hypo/hyper</strong> are both fast/slow and low/high pairs. If you see <em>brady</em>cardia on the HESI, your patient has a <em>slow</em> heart — think "Brady is slow to the party."
+    </div>
+
+    <!-- SUFFIXES -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon icon-gold">➡️</div>
+        <h2>Common Medical Suffixes</h2>
+        <span class="count">5 suffixes</span>
+      </div>
+      <table class="affix-table">
+        <thead>
+          <tr>
+            <th style="width:100px">Suffix</th>
+            <th>Meaning</th>
+            <th>HESI Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="affix">-itis</span></td>
+            <td class="meaning">Inflammation of</td>
+            <td class="examples-cell">appendicitis, bronchitis, arthritis, tonsillitis</td>
+          </tr>
+          <tr>
+            <td><span class="affix">-ectomy</span></td>
+            <td class="meaning">Surgical removal</td>
+            <td class="examples-cell">appendectomy, tonsillectomy, mastectomy, hysterectomy</td>
+          </tr>
+          <tr>
+            <td><span class="affix">-ology</span></td>
+            <td class="meaning">Study of</td>
+            <td class="examples-cell">cardiology (heart), neurology (nerves), oncology (cancer)</td>
+          </tr>
+          <tr>
+            <td><span class="affix">-oscopy</span></td>
+            <td class="meaning">Visual examination (using a scope)</td>
+            <td class="examples-cell">colonoscopy, bronchoscopy, arthroscopy</td>
+          </tr>
+          <tr>
+            <td><span class="affix">-plasty</span></td>
+            <td class="meaning">Surgical repair or reconstruction</td>
+            <td class="examples-cell">rhinoplasty (nose), angioplasty (blood vessel), arthroplasty (joint)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 Quick Decode:</strong> "Appendic<strong>itis</strong>" = inflammation of the appendix. "Appendic<strong>ectomy</strong>" = removal of the appendix. Swap the suffix, change the meaning. This decoding skill alone can answer dozens of HESI questions!
+    </div>
+
+    <!-- WORD BUILDING SUMMARY -->
+    <div class="section-card">
+      <div class="section-head">
+        <div class="section-icon icon-green">🧩</div>
+        <h2>Putting It Together — Word Building</h2>
+      </div>
+      <div style="padding: 20px 24px;">
+        <p style="font-size:14px;color:var(--gray-700);line-height:1.7;margin-bottom:16px;">
+          Medical words are built like puzzles. Most have a <strong>root</strong> (body part or concept), an optional <strong>prefix</strong> (before the root), and an optional <strong>suffix</strong> (after the root). Once you know the parts, you can decode words you've never seen.
+        </p>
+        <div style="display:grid;gap:10px;">
+          <div style="background:var(--gray-100);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--gray-400);font-weight:600;min-width:120px;">brady + cardia =</span>
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">bradycardia</span>
+            <span style="font-size:13px;color:var(--gray-700);">— slow + heart = slow heart rate</span>
+          </div>
+          <div style="background:var(--gray-100);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--gray-400);font-weight:600;min-width:120px;">hyper + glyc + emia =</span>
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">hyperglycemia</span>
+            <span style="font-size:13px;color:var(--gray-700);">— high + sugar + blood condition = high blood sugar</span>
+          </div>
+          <div style="background:var(--gray-100);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--gray-400);font-weight:600;min-width:120px;">gastr + itis =</span>
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">gastritis</span>
+            <span style="font-size:13px;color:var(--gray-700);">— stomach + inflammation = inflammation of the stomach</span>
+          </div>
+          <div style="background:var(--gray-100);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--gray-400);font-weight:600;min-width:120px;">sub + cutane + ous =</span>
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">subcutaneous</span>
+            <span style="font-size:13px;color:var(--gray-700);">— under + skin + pertaining to = pertaining to under the skin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /notes panel -->
+
+  <!-- ══ QUIZ PANEL ══ -->
+  <div id="tab-quiz" class="tab-panel">
+    <div class="quiz-header">
+      <div>
+        <h2>Day 5 Practice Quiz</h2>
+        <div class="quiz-meta">25 questions · Medical Terminology &amp; Vocabulary</div>
+      </div>
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar-outer">
+          <div class="quiz-progress-bar-inner" id="quiz-progress-bar" style="width:0%"></div>
+        </div>
+        <span class="quiz-progress-text" id="quiz-progress-text">0 / 25</span>
+      </div>
+    </div>
+
+    <div id="quiz-questions"></div>
+    <div class="results-panel" id="results-panel">
+      <div class="results-score-big" id="results-score">—</div>
+      <div class="results-label">out of 25 correct</div>
+      <div class="results-msg" id="results-msg"></div>
+      <div class="results-sub" id="results-sub"></div>
+      <button class="btn-retake" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+  </div>
+
+</div><!-- /tabs-wrap -->
+
+<script>
+const QUESTIONS = [
+  // KEY VOCAB (10)
+  {q:"What does the term 'benign' mean when describing a tumor?", opts:["Rapidly spreading","Not cancerous or harmful","Requiring immediate surgery","Located in the brain"], ans:1},
+  {q:"A patient's mass is described as 'malignant.' What does this indicate?", opts:["The mass is painless","The mass is cancerous and may spread","The mass is a cyst","The mass has shrunk"], ans:1},
+  {q:"The doctor gives the patient a good 'prognosis.' This means:", opts:["The patient will need surgery","The treatment has already failed","The expected disease outcome is favorable","The diagnosis is unclear"], ans:2},
+  {q:"A patient reports an 'adverse effect' from their new medication. This means:", opts:["The medication is working well","The patient forgot to take the dose","The medication caused a harmful reaction","The medication requires refrigeration"], ans:2},
+  {q:"Which of the following best describes a 'chronic' condition?", opts:["Sudden onset lasting days","Persisting long-term, 3+ months","An infection requiring antibiotics","Always fatal"], ans:1},
+  {q:"An 'acute' illness is best characterized as:", opts:["Long-lasting and slowly progressive","Mild and self-limiting","Sudden, severe, and short in duration","Related to genetics"], ans:2},
+  {q:"The term 'anterior' refers to:", opts:["Toward the back of the body","Toward the top of the body","Toward the front of the body","Toward the right side"], ans:2},
+  {q:"'Posterior' is the anatomical term meaning:", opts:["Front-facing","Toward the back","Below the waist","Inside the body cavity"], ans:1},
+  {q:"A 'diagnosis' is best defined as:", opts:["A surgical procedure to treat disease","Identifying a disease or condition based on symptoms and tests","A type of medication","A follow-up appointment"], ans:1},
+  {q:"Which of the following is an example of a 'symptom'?", opts:["Elevated white blood cell count on a lab test","Fever measured by a thermometer","A patient reporting severe headache pain","An X-ray showing a fracture"], ans:2},
+
+  // PREFIXES (8)
+  {q:"A patient has 'bradycardia.' What does this mean?", opts:["Elevated blood pressure","A fast heart rate","A slow heart rate","Irregular heart rhythm"], ans:2},
+  {q:"Which prefix means 'fast' or 'rapid'?", opts:["brady-","hypo-","tachy-","anti-"], ans:2},
+  {q:"'Hypoglycemia' refers to:", opts:["High blood sugar","Low blood sugar","High blood pressure","Low oxygen saturation"], ans:1},
+  {q:"The prefix 'hyper-' means:", opts:["Below normal","Normal","Above normal or excessive","Against"], ans:2},
+  {q:"A medication described as an 'anticoagulant' works by:", opts:["Speeding up blood clotting","Preventing or slowing blood clotting","Raising blood pressure","Reducing inflammation"], ans:1},
+  {q:"A 'subcutaneous' injection is administered:", opts:["Into a vein","Into a muscle","Under the skin","Into the spinal cord"], ans:2},
+  {q:"'Tachypnea' refers to:", opts:["Slow breathing","Painful breathing","Rapid breathing","Cessation of breathing"], ans:0},
+  {q:"Which prefix means 'under' or 'below'?", opts:["anti-","hyper-","tachy-","sub-"], ans:3},
+
+  // SUFFIXES (7)
+  {q:"The suffix '-itis' indicates:", opts:["Surgical removal","Inflammation","Study of","Visual examination"], ans:1},
+  {q:"A 'tonsillectomy' is:", opts:["Inflammation of the tonsils","Visual examination of the tonsils","Surgical removal of the tonsils","Study of the tonsils"], ans:2},
+  {q:"What does the suffix '-ology' mean?", opts:["Surgical repair","Inflammation","Study of","Removal of"], ans:2},
+  {q:"A 'colonoscopy' involves:", opts:["Surgical removal of the colon","Inflammation of the colon","Visual examination of the colon using a scope","Reconstruction of the colon"], ans:2},
+  {q:"The suffix '-plasty' refers to:", opts:["Inflammation","Study of","Surgical removal","Surgical repair or reconstruction"], ans:3},
+  {q:"'Arthritis' means inflammation of which structure?", opts:["Arteries","Joints","Skin","Lymph nodes"], ans:1},
+  {q:"A physician specializing in 'oncology' focuses on:", opts:["Heart disease","Nerve disorders","The study and treatment of cancer","The study of bones"], ans:2},
+];
+
+const LETTERS = ['A','B','C','D'];
+
+let answered = 0;
+let score = 0;
+let answerMap = {};
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  answered = 0; score = 0; answerMap = {};
+  updateProgress();
+  QUESTIONS.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'q-' + qi;
+    const shuffled = q.opts.map((o, i) => ({text: o, orig: i}));
+    card.innerHTML = `
+      <div class="q-top">
+        <div class="q-num">Question ${qi+1} of 25</div>
+        <div class="q-text">${q.q}</div>
+      </div>
+      <div class="q-options">
+        ${shuffled.map((o, i) => `
+          <button class="q-opt" onclick="answer(${qi}, ${o.orig}, this, ${q.ans})">
+            <span class="opt-letter">${LETTERS[i]}</span>
+            ${o.text}
+          </button>`).join('')}
+      </div>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function answer(qi, chosen, btn, correct) {
+  if (answerMap[qi] !== undefined) return;
+  answerMap[qi] = chosen;
+  answered++;
+  const card = document.getElementById('q-' + qi);
+  const btns = card.querySelectorAll('.q-opt');
+  btns.forEach(b => b.classList.add('disabled'));
+  const fb = document.getElementById('fb-' + qi);
+  if (chosen === correct) {
+    score++;
+    btn.classList.add('correct');
+    fb.textContent = '✓ Correct!';
+    fb.className = 'q-feedback show correct';
+  } else {
+    btn.classList.add('wrong');
+    btns.forEach(b => {
+      const isCorrect = parseInt(b.getAttribute('onclick').match(/answer\(\d+, (\d+)/)[1]) === correct;
+      if (isCorrect) b.classList.add('correct');
+    });
+    const correctText = QUESTIONS[qi].opts[correct];
+    fb.textContent = `✗ The correct answer is: ${correctText}`;
+    fb.className = 'q-feedback show wrong';
+  }
+  updateProgress();
+  if (answered === QUESTIONS.length) setTimeout(showResults, 700);
+}
+
+function updateProgress() {
+  const pct = (answered / QUESTIONS.length) * 100;
+  document.getElementById('quiz-progress-bar').style.width = pct + '%';
+  document.getElementById('quiz-progress-text').textContent = answered + ' / ' + QUESTIONS.length;
+}
+
+function showResults() {
+  document.getElementById('results-panel').classList.add('show');
+  document.getElementById('results-score').innerHTML = score + '<span>/' + QUESTIONS.length + '</span>';
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  let msg, sub;
+  if (pct >= 88) {
+    msg = '🎉 Outstanding! You\'ve mastered medical terminology!';
+    sub = 'Your word-building skills are strong. Keep this momentum going into Day 6!';
+  } else if (pct >= 72) {
+    msg = '👍 Great work, Lauren!';
+    sub = 'Solid understanding — review the terms you missed and they\'ll stick fast.';
+  } else if (pct >= 56) {
+    msg = '💪 Good effort — you\'re building your skills!';
+    sub = 'Re-read the prefixes and suffixes sections, then try again. Each pass improves retention.';
+  } else {
+    msg = '📚 Keep going — every rep builds your foundation!';
+    sub = 'Spend another 15 minutes on the Study Notes tab before retaking. You\'ve got this!';
+  }
+  document.getElementById('results-msg').textContent = msg;
+  document.getElementById('results-sub').textContent = sub;
+  document.getElementById('results-panel').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function resetQuiz() {
+  document.getElementById('results-panel').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({top: document.getElementById('tab-quiz').offsetTop - 60, behavior:'smooth'});
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+buildQuiz();
+</script>
+</body>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:space-between;">
+  <a href="lauren-hesi-day4.html" style="padding:10px 20px;border-radius:8px;border:2px solid #dde2f0;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#1a2744;text-decoration:none;">← Day 4</a>
+  <a href="lauren-hesi-day6-math.html" style="padding:10px 20px;border-radius:8px;background:#1a2744;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:white;text-decoration:none;">Day 6 →</a>
+</div>
+</html>

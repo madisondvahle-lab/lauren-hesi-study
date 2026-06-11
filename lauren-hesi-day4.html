@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lauren's HESI Study Plan — Day 4: Urinary System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-mid: #243358;
+    --navy-light: #2e4070;
+    --gold: #c9973a;
+    --gold-light: #e8b95a;
+    --teal: #3a8c8c;
+    --teal-light: #4db8b8;
+    --cream: #f8f6f1;
+    --ink: #1c1c2e;
+    --muted: #6b7280;
+    --border: #e2ddd5;
+    --correct: #2d7a4e;
+    --correct-bg: #edf7f1;
+    --wrong: #b5340e;
+    --wrong-bg: #fdf0ec;
+    --partial: #7c5c0a;
+    --partial-bg: #fdf8ec;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: white;
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(201,151,58,.12);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(58,140,140,.08);
+    pointer-events: none;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-name {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    letter-spacing: .04em;
+    margin-bottom: 4px;
+  }
+  .header-title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+  }
+  .header-title span {
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,.55);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  .score-badge {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 10px 18px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .score-badge .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.5);
+    font-weight: 600;
+  }
+  .score-badge .score {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1.1;
+  }
+  .score-badge .score-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.45);
+  }
+
+  /* progress dots */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .progress-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: rgba(255,255,255,.45);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    transition: background .2s;
+  }
+  .dot.done { background: var(--teal-light); }
+  .dot.today {
+    background: var(--gold-light);
+    box-shadow: 0 0 0 3px rgba(232,185,90,.25);
+    width: 13px; height: 13px;
+  }
+  .dot.future { background: rgba(255,255,255,.15); }
+  .dot-num {
+    font-size: 9px;
+    color: rgba(255,255,255,.35);
+    font-weight: 600;
+    margin-left: 2px;
+  }
+
+  /* meta strip */
+  .meta-strip {
+    display: flex;
+    gap: 24px;
+    padding: 14px 32px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .meta-item .icon {
+    font-size: 15px;
+  }
+  .meta-item strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 32px;
+    background: white;
+    border-bottom: 2px solid var(--border);
+  }
+  .tab-btn {
+    padding: 14px 22px;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color .15s, border-color .15s;
+    letter-spacing: .01em;
+  }
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--gold);
+  }
+  .tab-btn:hover:not(.active) {
+    color: var(--navy-mid);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* STUDY NOTES */
+  .goal-banner {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .goal-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .goal-text .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .goal-text p {
+    font-size: 14px;
+    color: rgba(255,255,255,.85);
+    line-height: 1.55;
+  }
+
+  /* anatomy pathway */
+  .pathway {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .pathway-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .pathway-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .pf-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 100px;
+  }
+  .pf-icon {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .pf-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+  }
+  .pf-role {
+    font-size: 10.5px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 90px;
+    line-height: 1.4;
+  }
+  .pf-arrow {
+    font-size: 20px;
+    color: var(--gold);
+    margin: 0 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 13px;
+  }
+
+  /* structure cards */
+  .section-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--teal));
+  }
+  .card .card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .card .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: white;
+    background: var(--card-accent, var(--teal));
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin-bottom: 10px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card ul li {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.55;
+    padding: 5px 0 5px 18px;
+    position: relative;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--card-accent, var(--teal));
+    font-size: 11px;
+    top: 6px;
+  }
+
+  /* process box */
+  .process-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .process-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ps {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .ps-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ps-content strong {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .ps-content p {
+    font-size: 12.5px;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+  .ps-connector {
+    width: 2px;
+    height: 14px;
+    background: var(--border);
+    margin-left: 13px;
+  }
+
+  /* key facts */
+  .key-facts {
+    background: linear-gradient(135deg, #f0f7f7 0%, #e8f4f4 100%);
+    border: 1px solid #b2dada;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .key-facts h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 12px;
+  }
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .fact-pill {
+    background: white;
+    border: 1px solid #c5e5e5;
+    border-radius: 8px;
+    padding: 10px 13px;
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .fact-pill strong { color: var(--teal); }
+
+  /* ── QUIZ ── */
+  .quiz-header {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .quiz-header p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .quiz-progress-bar {
+    width: 200px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    border-radius: 3px;
+    transition: width .4s ease;
+  }
+  .quiz-score-display {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .question-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color .2s;
+  }
+  .question-card.answered { border-color: #d1d5db; }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .q-num {
+    min-width: 28px; height: 28px;
+    border-radius: 7px;
+    background: var(--navy);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .q-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .option-btn {
+    text-align: left;
+    padding: 11px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    background: #fafaf9;
+    font-size: 13.5px;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+    line-height: 1.4;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--teal);
+    background: #f0f9f9;
+  }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+    font-weight: 600;
+  }
+  .option-btn.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: var(--wrong);
+  }
+  .option-btn.reveal-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+    font-weight: 600;
+  }
+
+  .explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #f8f9fa;
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.55;
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--teal); }
+
+  /* final score */
+  .final-score {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    color: white;
+    margin-top: 24px;
+    display: none;
+  }
+  .final-score.show { display: block; }
+  .final-score .fs-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.5);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .final-score .fs-num {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .final-score .fs-denom {
+    font-size: 20px;
+    color: rgba(255,255,255,.4);
+  }
+  .final-score .fs-msg {
+    font-size: 15px;
+    color: rgba(255,255,255,.75);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .retry-btn {
+    margin-top: 20px;
+    padding: 12px 28px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .retry-btn:hover { background: var(--gold-light); }
+
+  /* tab panels */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  @media (max-width: 600px) {
+    header { padding: 22px 18px 20px; }
+    .meta-strip { padding: 12px 18px; gap: 16px; }
+    .tabs { padding: 0 18px; }
+    .content { padding: 24px 14px 48px; }
+    .pathway-flow { justify-content: center; }
+    .header-title { font-size: 21px; }
+    .pf-arrow { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="header-name">Lauren's HESI Study Plan</div>
+      <div class="header-title">Day 4: <span>Urinary System</span></div>
+      <div class="header-sub">Anatomy &amp; Physiology — Know the path, know the job</div>
+    </div>
+    <div class="score-badge">
+      <div class="label">Diagnostic</div>
+      <div class="score">33<span style="font-size:16px;color:rgba(232,185,90,.6)">/50</span></div>
+      <div class="score-sub">Baseline Score</div>
+    </div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Week Progress</span>
+    <div class="dots">
+      <div class="dot done" title="Day 1 ✓"></div>
+      <div class="dot done" title="Day 2 ✓"></div>
+      <div class="dot done" title="Day 3 ✓"></div>
+      <div class="dot today" title="Day 4 — Today"></div>
+      <div class="dot future" title="Day 5"></div>
+      <div class="dot future" title="Day 6"></div>
+      <div class="dot future" title="Day 7"></div>
+    </div>
+    <span class="dot-num">4 of 7</span>
+  </div>
+</header>
+
+<div class="meta-strip">
+  <div class="meta-item"><span class="icon">⏱</span> <span><strong>60–90 min</strong> study time</span></div>
+  <div class="meta-item"><span class="icon">📋</span> <span><strong>20 questions</strong> in quiz</span></div>
+  <div class="meta-item"><span class="icon">🫘</span> <span>Topic: <strong>Urinary System</strong></span></div>
+  <div class="meta-item"><span class="icon">📅</span> <span>Day <strong>4</strong> of 7</span></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('notes', this)">📖 Study Notes</button>
+  <button class="tab-btn" onclick="switchTab('quiz', this)">✏️ Practice Quiz</button>
+</div>
+
+<!-- ══════════════ STUDY NOTES ══════════════ -->
+<div id="tab-notes" class="tab-panel active">
+  <div class="content">
+
+    <div class="goal-banner">
+      <div class="goal-icon">🎯</div>
+      <div class="goal-text">
+        <div class="label">Today's Goal</div>
+        <p>Learn the pathway urine takes from creation to excretion, and the specific job each structure performs. By the end, you should be able to trace the path — kidneys → ureters → bladder → urethra — and explain what happens at each stop.</p>
+      </div>
+    </div>
+
+    <!-- Pathway flow -->
+    <div class="pathway">
+      <div class="pathway-title">🔁 Urine Pathway at a Glance</div>
+      <div class="pathway-flow">
+        <div class="pf-step">
+          <div class="pf-icon">🫘</div>
+          <div class="pf-name">Kidneys</div>
+          <div class="pf-role">Filter blood &amp; make urine</div>
+        </div>
+        <div class="pf-arrow">→</div>
+        <div class="pf-step">
+          <div class="pf-icon">〰️</div>
+          <div class="pf-name">Ureters</div>
+          <div class="pf-role">Carry urine to bladder</div>
+        </div>
+        <div class="pf-arrow">→</div>
+        <div class="pf-step">
+          <div class="pf-icon">🫧</div>
+          <div class="pf-name">Bladder</div>
+          <div class="pf-role">Stores urine</div>
+        </div>
+        <div class="pf-arrow">→</div>
+        <div class="pf-step">
+          <div class="pf-icon">🔽</div>
+          <div class="pf-name">Urethra</div>
+          <div class="pf-role">Carries urine out of body</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Structure Cards -->
+    <div class="section-heading">🫘 The Four Structures</div>
+    <div class="cards-grid">
+
+      <div class="card" style="--card-accent:#1a6b8a">
+        <span class="card-icon">🫘</span>
+        <div class="card-tag">Kidneys</div>
+        <h3>Filter &amp; Producer</h3>
+        <ul>
+          <li>Bean-shaped organs — one on each side of the spine</li>
+          <li>Filter all of the blood roughly every 30 minutes</li>
+          <li>Remove waste products (urea, creatinine) from blood</li>
+          <li>Produce urine as the byproduct of filtration</li>
+          <li>Also regulate water balance, blood pressure, and electrolytes</li>
+          <li>Contain the <strong>nephron</strong> — the functional filtering unit</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--card-accent:#3a8c8c">
+        <span class="card-icon">〰️</span>
+        <div class="card-tag">Ureters</div>
+        <h3>The Delivery Tubes</h3>
+        <ul>
+          <li>Two narrow muscular tubes (one per kidney)</li>
+          <li>Carry urine <em>from the kidney</em> down to the bladder</li>
+          <li>Use peristalsis (rhythmic muscle squeezes) to move urine</li>
+          <li>About 25–30 cm long in adults</li>
+          <li>Connect at the renal pelvis (the kidney's "funnel")</li>
+          <li>Do <strong>not</strong> store or filter — transport only</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--card-accent:#5b6abf">
+        <span class="card-icon">🫧</span>
+        <div class="card-tag">Bladder</div>
+        <h3>The Storage Tank</h3>
+        <ul>
+          <li>Hollow muscular organ in the lower pelvis</li>
+          <li>Stores urine until the body is ready to void (urinate)</li>
+          <li>Lined with transitional epithelium (stretches as it fills)</li>
+          <li>Holds ~400–600 mL in a healthy adult</li>
+          <li>Stretch receptors signal the brain when it's time to void</li>
+          <li>The <strong>detrusor muscle</strong> contracts during urination</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--card-accent:#c9973a">
+        <span class="card-icon">🔽</span>
+        <div class="card-tag">Urethra</div>
+        <h3>The Exit Route</h3>
+        <ul>
+          <li>Short tube that carries urine from the bladder out of the body</li>
+          <li>Female urethra: ~4 cm (shorter → higher UTI risk)</li>
+          <li>Male urethra: ~20 cm (longer, also carries semen)</li>
+          <li>Two sphincters control urine flow: internal (involuntary) &amp; external (voluntary)</li>
+          <li>Final stop in the urinary pathway</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Urine Formation Process -->
+    <div class="section-heading">⚗️ How Urine Is Made (in the Nephron)</div>
+    <div class="process-box">
+      <h3>The 3-Step Process Inside Each Kidney</h3>
+      <div class="process-steps">
+        <div class="ps">
+          <div class="ps-num">1</div>
+          <div class="ps-content">
+            <strong>Filtration</strong>
+            <p>Blood is pushed under pressure through tiny capillaries in the <strong>glomerulus</strong>. Water, salts, glucose, amino acids, and wastes pass into the nephron tubule. Large proteins and blood cells stay in the blood — they're too big to cross.</p>
+          </div>
+        </div>
+        <div class="ps-connector"></div>
+        <div class="ps">
+          <div class="ps-num">2</div>
+          <div class="ps-content">
+            <strong>Reabsorption</strong>
+            <p>As the filtered fluid travels through the tubule, the body reclaims what it needs — most water, glucose, and essential salts are pulled back into the bloodstream. This keeps you from losing valuable nutrients in urine.</p>
+          </div>
+        </div>
+        <div class="ps-connector"></div>
+        <div class="ps">
+          <div class="ps-num">3</div>
+          <div class="ps-content">
+            <strong>Secretion</strong>
+            <p>Additional waste products (like hydrogen ions and certain drugs) are actively pushed out of the blood into the tubule fluid. This fine-tunes the composition of urine and helps maintain blood pH.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Facts -->
+    <div class="section-heading">📌 HESI Must-Know Facts</div>
+    <div class="key-facts">
+      <h3>🔑 Key Facts</h3>
+      <div class="facts-grid">
+        <div class="fact-pill"><strong>Urine direction:</strong> Kidneys → Ureters → Bladder → Urethra</div>
+        <div class="fact-pill"><strong>Kidney job:</strong> Filter blood AND produce urine</div>
+        <div class="fact-pill"><strong>Ureter job:</strong> Transport only — no storage, no filtration</div>
+        <div class="fact-pill"><strong>Bladder job:</strong> Storage — the only urinary organ that holds urine</div>
+        <div class="fact-pill"><strong>Urethra job:</strong> Final exit — carries urine out of the body</div>
+        <div class="fact-pill"><strong>Female urethra</strong> is shorter → higher UTI risk</div>
+        <div class="fact-pill"><strong>Peristalsis</strong> moves urine through the ureters</div>
+        <div class="fact-pill"><strong>Nephron</strong> is the kidney's functional filtering unit</div>
+        <div class="fact-pill"><strong>3 steps:</strong> Filtration → Reabsorption → Secretion</div>
+        <div class="fact-pill"><strong>Detrusor muscle</strong> in bladder wall contracts to void</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ QUIZ ══════════════ -->
+<div id="tab-quiz" class="tab-panel">
+  <div class="content">
+
+    <div class="quiz-header">
+      <div>
+        <h2>Practice Quiz — Urinary System</h2>
+        <p>20 questions · Select an answer to reveal the explanation</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <div class="quiz-score-display" id="scoreDisplay">Score: 0 / 0</div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="questionsContainer"></div>
+    <div class="final-score" id="finalScore">
+      <div class="fs-label">Quiz Complete 🎉</div>
+      <div><span class="fs-num" id="finalNum">0</span><span class="fs-denom"> / 20</span></div>
+      <div class="fs-msg" id="finalMsg"></div>
+      <button class="retry-btn" onclick="resetQuiz()">Try Again</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "What is the primary function of the kidneys?",
+    options: ["Store urine until voiding", "Carry urine to the bladder", "Filter blood and produce urine", "Expel urine from the body"],
+    answer: 2,
+    explanation: "The kidneys filter blood to remove waste products and excess substances, producing urine as a byproduct. They are the main filtration organs of the urinary system."
+  },
+  {
+    q: "In what order does urine travel through the urinary system?",
+    options: ["Bladder → Kidneys → Ureters → Urethra", "Kidneys → Urethra → Ureters → Bladder", "Kidneys → Ureters → Bladder → Urethra", "Ureters → Kidneys → Bladder → Urethra"],
+    answer: 2,
+    explanation: "The correct pathway is: Kidneys (produce urine) → Ureters (transport) → Bladder (store) → Urethra (excrete). This is a high-yield HESI fact."
+  },
+  {
+    q: "Which structure carries urine from the kidneys to the bladder?",
+    options: ["Urethra", "Ureter", "Renal pelvis", "Collecting duct"],
+    answer: 1,
+    explanation: "The ureters are two muscular tubes that transport urine from each kidney down to the bladder using peristaltic contractions."
+  },
+  {
+    q: "The bladder's primary function is to:",
+    options: ["Filter blood", "Produce urine", "Store urine", "Excrete urine from the body"],
+    answer: 2,
+    explanation: "The bladder is the urinary system's storage organ. It collects and holds urine until the volume triggers the urge to void, then contracts to expel it."
+  },
+  {
+    q: "Which muscle in the bladder wall contracts to expel urine during urination?",
+    options: ["Sphincter muscle", "Detrusor muscle", "Rectus abdominis", "Psoas muscle"],
+    answer: 1,
+    explanation: "The detrusor muscle is the smooth muscle of the bladder wall. When it contracts, it increases pressure inside the bladder and pushes urine out through the urethra."
+  },
+  {
+    q: "Why are females at higher risk for urinary tract infections (UTIs) than males?",
+    options: ["Females have two ureters instead of one", "The female urethra is shorter, allowing bacteria easier access to the bladder", "The female bladder has thinner walls", "Females have lower immune function"],
+    answer: 1,
+    explanation: "The female urethra is approximately 4 cm long, compared to about 20 cm in males. This shorter distance makes it easier for bacteria from outside the body to travel to the bladder and cause infection."
+  },
+  {
+    q: "The functional unit of the kidney that actually performs filtration is called the:",
+    options: ["Glomerulus", "Nephron", "Renal pelvis", "Calyx"],
+    answer: 1,
+    explanation: "The nephron is the kidney's functional unit. Each kidney contains approximately 1 million nephrons. Within each nephron, the glomerulus performs filtration and the tubules handle reabsorption and secretion."
+  },
+  {
+    q: "Which of the following is NOT a function of the kidneys?",
+    options: ["Regulating blood pressure", "Maintaining electrolyte balance", "Storing urine", "Removing waste products from blood"],
+    answer: 2,
+    explanation: "Storing urine is the bladder's job, not the kidneys'. The kidneys produce urine but do not store it — urine immediately passes into the ureters toward the bladder."
+  },
+  {
+    q: "What mechanism do the ureters use to move urine toward the bladder?",
+    options: ["Gravity only", "Peristalsis", "Osmosis", "Active transport"],
+    answer: 1,
+    explanation: "The ureters move urine via peristalsis — rhythmic, wave-like muscular contractions that push urine from the kidney down to the bladder, even against gravity if needed."
+  },
+  {
+    q: "The first step of urine formation in the nephron is:",
+    options: ["Secretion", "Reabsorption", "Filtration", "Concentration"],
+    answer: 2,
+    explanation: "Filtration is the first step. Blood is filtered under pressure in the glomerulus; water, small solutes, and waste products move into the nephron tubule while large proteins and blood cells remain in the blood."
+  },
+  {
+    q: "During reabsorption in the nephron, which substance is normally completely reclaimed and should NOT appear in urine?",
+    options: ["Urea", "Creatinine", "Glucose", "Potassium"],
+    answer: 2,
+    explanation: "Glucose is normally completely reabsorbed in healthy individuals and should not appear in urine. The presence of glucose in urine (glucosuria) is a clinical sign of diabetes mellitus when blood glucose exceeds the renal threshold."
+  },
+  {
+    q: "Which urinary structure has TWO sphincters that control urine flow?",
+    options: ["Kidney", "Ureter", "Bladder", "Urethra"],
+    answer: 3,
+    explanation: "The urethra has an internal sphincter (smooth muscle, involuntary — controlled by the autonomic nervous system) and an external sphincter (skeletal muscle, voluntary — under conscious control)."
+  },
+  {
+    q: "Urine is produced in the kidneys at the:",
+    options: ["Renal capsule", "Renal cortex and medulla (within nephrons)", "Renal pelvis", "Ureteropelvic junction"],
+    answer: 1,
+    explanation: "Urine is produced in the nephrons, which are located in the renal cortex and medulla. The renal pelvis is simply a funnel that collects finished urine and channels it into the ureter."
+  },
+  {
+    q: "A patient reports burning on urination and frequent urges to void small amounts. The nurse recognizes this is most consistent with infection in which structure?",
+    options: ["Kidney", "Ureter", "Bladder (cystitis)", "Urethra (urethritis) or bladder"],
+    answer: 3,
+    explanation: "Dysuria (burning), urgency, and frequency are classic signs of lower urinary tract infection — either urethritis or cystitis (bladder infection). These symptoms arise from inflammation of the urethra or bladder lining."
+  },
+  {
+    q: "The process by which additional wastes are moved from the blood INTO the tubule fluid (urine) is called:",
+    options: ["Filtration", "Reabsorption", "Secretion", "Excretion"],
+    answer: 2,
+    explanation: "Secretion is the third step of urine formation. Substances like hydrogen ions, potassium, and some drugs are actively transported from peritubular capillaries into the tubule fluid to be excreted in urine."
+  },
+  {
+    q: "How much urine can a healthy adult bladder typically hold?",
+    options: ["50–100 mL", "150–200 mL", "400–600 mL", "Over 1,000 mL"],
+    answer: 2,
+    explanation: "A healthy adult bladder can hold approximately 400–600 mL of urine. The urge to void is typically felt around 150–200 mL, but the bladder can comfortably hold more until a convenient time."
+  },
+  {
+    q: "Which of the following correctly describes the ureter?",
+    options: ["A muscular organ that stores urine", "A tube that carries urine from the bladder to outside the body", "A tube that transports urine from the kidney to the bladder", "The functional filtration unit of the kidney"],
+    answer: 2,
+    explanation: "Each ureter is a muscular tube that transports urine from one kidney to the bladder. There are two ureters — one from each kidney. They do not store urine."
+  },
+  {
+    q: "The kidneys help regulate blood pressure by controlling:",
+    options: ["Heart rate directly", "Blood volume through water and sodium balance", "The diameter of large arteries", "Red blood cell production only"],
+    answer: 1,
+    explanation: "The kidneys regulate blood pressure by controlling blood volume — they adjust how much water and sodium are retained or excreted. More retention = higher volume = higher pressure. They also release renin, activating the renin-angiotensin system."
+  },
+  {
+    q: "After urine leaves the collecting duct inside the kidney, where does it go next?",
+    options: ["Directly to the bladder", "Into the renal pelvis, then the ureter", "Into the urethra", "Back into the bloodstream"],
+    answer: 1,
+    explanation: "Urine from the collecting ducts drains into the minor calyces → major calyces → renal pelvis. From the renal pelvis, it flows into the ureter and travels down to the bladder."
+  },
+  {
+    q: "Which statement about the urethra is TRUE?",
+    options: ["It filters blood and produces urine", "It is the same length in males and females", "It is the last segment of the urinary tract, carrying urine out of the body", "It stores urine between voiding episodes"],
+    answer: 2,
+    explanation: "The urethra carries urine from the bladder to the outside of the body — it is the final segment of the urinary pathway. It does not filter, store, or produce urine. It differs in length between sexes (female ~4 cm, male ~20 cm)."
+  }
+];
+
+let userAnswers = new Array(20).fill(null);
+let answered = new Array(20).fill(false);
+
+function buildQuiz() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `q${i}`;
+
+    const optionsHTML = q.options.map((opt, j) =>
+      `<button class="option-btn" id="q${i}o${j}" onclick="selectAnswer(${i}, ${j})">${opt}</button>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="q-header">
+        <div class="q-num">${i + 1}</div>
+        <div class="q-text">${q.q}</div>
+      </div>
+      <div class="options">${optionsHTML}</div>
+      <div class="explanation" id="exp${i}"><strong>Explanation:</strong> ${q.explanation}</div>
+    `;
+    container.appendChild(card);
+  });
+  updateScoreDisplay();
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (answered[qIdx]) return;
+  answered[qIdx] = true;
+  userAnswers[qIdx] = optIdx;
+
+  const correct = questions[qIdx].answer;
+  const card = document.getElementById(`q${qIdx}`);
+  card.classList.add('answered');
+
+  questions[qIdx].options.forEach((_, j) => {
+    const btn = document.getElementById(`q${qIdx}o${j}`);
+    btn.disabled = true;
+    if (j === correct) btn.classList.add(optIdx === correct ? 'correct' : 'reveal-correct');
+    else if (j === optIdx && optIdx !== correct) btn.classList.add('wrong');
+  });
+
+  document.getElementById(`exp${qIdx}`).classList.add('show');
+  updateScoreDisplay();
+
+  const allDone = answered.every(a => a);
+  if (allDone) showFinalScore();
+}
+
+function updateScoreDisplay() {
+  const total = answered.filter(Boolean).length;
+  const correct = userAnswers.reduce((sum, ans, i) => answered[i] && ans === questions[i].answer ? sum + 1 : sum, 0);
+  document.getElementById('scoreDisplay').textContent = `Score: ${correct} / ${total}`;
+  document.getElementById('progressFill').style.width = `${(total / 20) * 100}%`;
+}
+
+function showFinalScore() {
+  const correct = userAnswers.reduce((sum, ans, i) => ans === questions[i].answer ? sum + 1 : sum, 0);
+  document.getElementById('finalNum').textContent = correct;
+  const msgs = [
+    [0, 10, "Keep going — review the study notes and try again. You've got this! 💪"],
+    [11, 14, "Good effort! Review the sections you missed and you'll be ready. 📚"],
+    [15, 17, "Solid work! A couple more review passes and you'll master this. ⭐"],
+    [18, 19, "Great job! You clearly understand the urinary system. Almost perfect! 🎯"],
+    [20, 20, "Perfect score! You've mastered Day 4. On to Day 5! 🏆"]
+  ];
+  const msg = msgs.find(([lo, hi]) => correct >= lo && correct <= hi);
+  document.getElementById('finalMsg').textContent = msg[2];
+  document.getElementById('finalScore').classList.add('show');
+  document.getElementById('finalScore').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz() {
+  userAnswers = new Array(20).fill(null);
+  answered = new Array(20).fill(false);
+  document.getElementById('finalScore').classList.remove('show');
+  buildQuiz();
+  document.getElementById('questionsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  btn.classList.add('active');
+}
+
+buildQuiz();
+</script>
+</body>
+<div style="max-width:860px;margin:32px auto 40px;padding:0 24px;display:flex;justify-content:space-between;">
+  <a href="lauren-hesi-day3.html" style="padding:10px 20px;border-radius:8px;border:2px solid #dde2f0;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#1a2744;text-decoration:none;">← Day 3</a>
+  <a href="lauren-hesi-day5.html" style="padding:10px 20px;border-radius:8px;background:#1a2744;font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:white;text-decoration:none;">Day 5 →</a>
+</div>
+</html>
